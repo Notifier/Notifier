@@ -12,10 +12,12 @@
 namespace Notifier\Handler;
 
 use Notifier\Message\MessageInterface;
+use Notifier\Recipient\RecipientInterface;
 
 class VarDumpHandler extends AbstractHandler
 {
-    protected function send(MessageInterface $message)
+    protected $deliveryType = 'var_dump';
+    protected function send(MessageInterface $message, RecipientInterface $recipient)
     {
         var_dump($message);
     }

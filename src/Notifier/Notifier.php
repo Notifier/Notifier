@@ -46,6 +46,30 @@ class Notifier
     }
 
     /**
+     * Pushes a processor on to the stack.
+     *
+     * @param callable $processor
+     */
+    public function pushProcessor(callable $processor)
+    {
+        array_unshift($this->processors, $processor);
+    }
+
+    /**
+     * Pops a handler from the stack.
+     *
+     * @return Handler\HandlerInterface
+     * @throws \LogicException
+     */
+    public function popProcessor()
+    {
+        if (!count($this->processors)) {
+            throw new \LogicException('You tried to pop from an empty processor stack.');
+        }
+        return array_shift($this->processors);
+    }
+
+    /**
      * Send the message.
      *
      * @param Message\MessageInterface $message
@@ -73,7 +97,14 @@ class Notifier
         foreach ($this->processors as $processor) {
             $message = call_user_func($processor, $message);
         }
-        while (isset($this->handlers[$handlerKey]) && false === $this->handlers[$handlerKey]->handle($message)) {
+
+        $bubble = false;
+        while (isset($this->handlers[$handlerKey]) && $bubble === false) {
+            foreach ($message->getRecipients() as $recipient) {
+                if ($recipient->isHandling($message, $this->handlers[$handlerKey]->getDeliveryType())) {
+                    $bubble = $this->handlers[$handlerKey]->handle($message, $recipient);
+                }
+            }
             $handlerKey++;
         }
 

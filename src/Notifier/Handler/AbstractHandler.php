@@ -11,12 +11,15 @@
 namespace Notifier\Handler;
 
 use Notifier\Notifier;
+use Notifier\Recipient\RecipientInterface;
 use Notifier\Formatter\FormatterInterface;
 use Notifier\Formatter\NullFormatter;
 use Notifier\Message\MessageInterface;
 
 abstract class AbstractHandler implements HandlerInterface
 {
+    protected $deliveryType;
+
     /**
      * @var bool
      */
@@ -85,13 +88,25 @@ abstract class AbstractHandler implements HandlerInterface
         return $this->formatter;
     }
 
-    final public function handle(MessageInterface $message)
+    final public function handle(MessageInterface $message, RecipientInterface $recipient)
     {
         $message = $this->getFormatter()->format($message);
-        $this->send($message);
+        $this->send($message, $recipient);
         return false === $this->bubble;
     }
 
-    abstract protected function send(MessageInterface $message);
+    public function getDeliveryType()
+    {
+        return $this->deliveryType;
+    }
+
+    /**
+     * Send to a single recipient.
+     *
+     * @param \Notifier\Message\MessageInterface $message
+     * @param \Notifier\Recipient\RecipientInterface $recipient
+     * @return mixed
+     */
+    abstract protected function send(MessageInterface $message, RecipientInterface $recipient);
 
 }

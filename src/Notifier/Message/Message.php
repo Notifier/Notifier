@@ -63,7 +63,7 @@ class Message implements MessageInterface
     /**
      * @return array|RecipientInterface[]
      */
-    public function getRecipients()
+    public function &getRecipients()
     {
         return $this->recipients;
     }

@@ -15,7 +15,11 @@ use Notifier\Recipient\RecipientInterface;
 interface MessageInterface
 {
     public function getType();
-    public function getRecipients();
+
+    /**
+     * @return RecipientInterface[]
+     */
+    public function &getRecipients();
     public function getSubject();
     public function getContent();
 }

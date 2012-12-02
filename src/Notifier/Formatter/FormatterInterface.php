@@ -16,5 +16,9 @@ use Notifier\Message\MessageInterface;
 
 interface FormatterInterface
 {
+    /**
+     * @param MessageInterface $message
+     * @return MessageInterface
+     */
     public function format(MessageInterface $message);
 }

@@ -11,6 +11,7 @@
 namespace Notifier\Handler;
 
 use Notifier\Message\MessageInterface;
+use Notifier\Recipient\RecipientInterface;
 use Notifier\Formatter\FormatterInterface;
 
 interface HandlerInterface
@@ -27,9 +28,10 @@ interface HandlerInterface
      * Trigger the handler to handle the provided message.
      *
      * @param \Notifier\Message\MessageInterface $message
-     * @return bool
+     * @return bool True means that this handler handled the record, and that bubbling is not permitted.
+     *              False means the record was either not processed or that this handler allows bubbling.
      */
-    public function handle(MessageInterface $message);
+    public function handle(MessageInterface $message, RecipientInterface $recipient);
 
     /**
      * Get the formatter for the current handler.

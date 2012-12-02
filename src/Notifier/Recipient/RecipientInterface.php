@@ -10,7 +10,11 @@
 
 namespace Notifier\Recipient;
 
+use Notifier\Message\MessageInterface;
+
 interface RecipientInterface
 {
     public function getName();
+    public function getTypes();
+    public function isHandling(MessageInterface $message, $deliveryType);
 }

@@ -11,10 +11,12 @@
 namespace Notifier\Handler;
 
 use Notifier\Notifier;
+use Notifier\Recipient\RecipientInterface;
 use Notifier\Message\MessageInterface;
 
 class MailHandler extends AbstractHandler
 {
+    protected $deliveryType = 'mail';
     /**
      * @var array
      */
@@ -34,9 +36,9 @@ class MailHandler extends AbstractHandler
     /**
      * {@inheritdocs}
      */
-    protected function send(MessageInterface $message)
+    protected function send(MessageInterface $message, RecipientInterface $recipient)
     {
-        $to = $message->getRecipients();
+        $to = $recipient;
         $headers = implode("\r\n", $this->headers);
 
         mail($to, $message->getSubject(), $message->getContent(), $headers);
