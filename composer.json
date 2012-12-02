@@ -1,5 +1,5 @@
 {
-    "name": "NoUseFreak/Notifier",
+    "name": "Notifier/Notifier",
     "type": "library",
     "description": "Notifier, direct notifications.",
     "keywords": ["notification", "messages"],
