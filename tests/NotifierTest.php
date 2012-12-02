@@ -11,6 +11,8 @@
 namespace Notifier\Tests;
 
 use PHPUnit_Framework_TestCase;
+use Notifier\Recipient\Recipient;
+use Notifier\Handler\VarDumpHandler;
 use Notifier\Tests\Recipient\RecipientTest;
 use Notifier\Message\Message;
 use Notifier\Handler\NullHandler;
@@ -64,6 +66,34 @@ class NotifierTest extends PHPUnit_Framework_TestCase
         $this->notifier->pushHandler($handler);
         $message = new Message('test');
         $this->assertFalse($this->notifier->sendMessage($message));
+    }
+
+    public function testRecipientFilterSuccess()
+    {
+        $randString = uniqid('testString_');
+        $this->expectOutputRegex('/' . $randString . '/');
+        $handler = new VarDumpHandler('test');
+        $this->notifier->pushHandler($handler);
+        $message = new Message('test');
+        $message->setContent($randString);
+        $recipient = new Recipient('Me');
+        $recipient->addType('test', 'var_dump');
+        $message->addRecipient($recipient);
+        $this->notifier->sendMessage($message);
+    }
+
+    public function testRecipientFilterFailure()
+    {
+        $randString = uniqid('testString_');
+        $this->expectOutputRegex('/^$/');
+        $handler = new VarDumpHandler('test');
+        $this->notifier->pushHandler($handler);
+        $message = new Message('test');
+        $message->setContent($randString);
+        $recipient = new Recipient('Me');
+        $recipient->addType('test', 'var_dumps');
+        $message->addRecipient($recipient);
+        $this->notifier->sendMessage($message);
     }
 
 }
