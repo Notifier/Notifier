@@ -1,6 +1,8 @@
 Notifier
 ========
 
+[![Build Status](https://secure.travis-ci.org/nousefreak/Notifier.png)](https://travis-ci.org/nousefreak/Notifier)
+
 Notifier acts as a notification center.
 
 Recipients will only receive the messages they signed up for.
