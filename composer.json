@@ -1,0 +1,23 @@
+{
+    "name": "NoUseFreak/Notifier",
+    "type": "library",
+    "description": "Notifier, direct notifications.",
+    "keywords": ["notification", "messages"],
+    "homepage": "http://notifier.nousefreak.be",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Dries De Peuter",
+            "email": "dries@nousefreak.be",
+            "homepage": "http://nousefreak.be"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.4"
+    },
+    "autoload": {
+        "psr-0" : {
+            "Notifier" : "src/"
+        }
+    }
+}
