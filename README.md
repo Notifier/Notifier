@@ -1,2 +1,37 @@
 Notifier
 ========
+
+Notifier acts as a notification center.
+
+Recipients will only receive the messages they signed up for.
+
+## Usage
+```php
+<?php
+
+$notifier = new Notifier\Notifier();
+$notifier->pushProcessor(function($message) {
+    $recipients = $message->getRecipients();
+    // only set the filters just before sending.
+    foreach ($recipients as &$recipient) {
+        if ($recipient->getName() == 'Dries') {
+            $recipient->addType('test', 'var_dump');
+        }
+    }
+    return $message;
+});
+$notifier->pushHandler(new Notifier\Handler\VarDumpHandler(array('test', 'mailing')));
+
+$message = new Notifier\Message\Message('test');
+$message->addRecipient(new Notifier\Recipient\Recipient('Dries'));
+
+$notifier->sendMessage($message);
+```
+
+## Current state
+
+The project is still in development and is not yet suited for production environments.
+
+## License
+
+Notifier is licensed under the MIT license.
