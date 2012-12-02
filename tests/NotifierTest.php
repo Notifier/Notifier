@@ -13,7 +13,6 @@ namespace Notifier\Tests;
 use PHPUnit_Framework_TestCase;
 use Notifier\Recipient\Recipient;
 use Notifier\Handler\VarDumpHandler;
-use Notifier\Tests\Recipient\RecipientTest;
 use Notifier\Message\Message;
 use Notifier\Handler\NullHandler;
 use Notifier\Notifier;
