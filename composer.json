@@ -3,7 +3,7 @@
     "type": "library",
     "description": "Notifier, direct notifications.",
     "keywords": ["notification", "messages"],
-    "homepage": "http://notifier.nousefreak.be",
+    "homepage": "https://github.com/nousefreak/Notifier",
     "license": "MIT",
     "authors": [
         {
