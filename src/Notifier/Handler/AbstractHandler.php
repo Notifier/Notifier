@@ -18,6 +18,11 @@ use Notifier\Message\MessageInterface;
 
 abstract class AbstractHandler implements HandlerInterface
 {
+    /**
+     * The type of notification this handler sends.
+     *
+     * @var string
+     */
     protected $deliveryType;
 
     /**

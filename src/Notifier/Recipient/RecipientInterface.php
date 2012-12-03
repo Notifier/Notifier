@@ -16,5 +16,7 @@ interface RecipientInterface
 {
     public function getName();
     public function getTypes();
+    public function getInfo($key);
+    public function setInfo($key, $value);
     public function isHandling(MessageInterface $message, $deliveryType);
 }
