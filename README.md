@@ -1,7 +1,7 @@
 Notifier
 ========
 
-[![Build Status](https://secure.travis-ci.org/nousefreak/Notifier.png)](https://travis-ci.org/nousefreak/Notifier)
+[![Build Status](https://secure.travis-ci.org/NoUseFreak/Notifier.png)](https://travis-ci.org/NoUseFreak/Notifier)
 
 Notifier acts as a notification center.
 
