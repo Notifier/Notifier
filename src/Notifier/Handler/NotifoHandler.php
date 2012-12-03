@@ -71,7 +71,7 @@ class NotifoHandler extends AbstractHandler
      *
      * @param array $data
      */
-    protected function setData(array $data)
+    protected function setData(array $data = null)
     {
         if (is_null($data)) {
             $data = array(
