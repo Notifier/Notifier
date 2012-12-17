@@ -16,7 +16,7 @@ $notifier->pushProcessor(function($message) {
     $recipients = $message->getRecipients();
     // only set the filters just before sending.
     foreach ($recipients as &$recipient) {
-        if ($recipient->getName() == 'Dries') {
+        if ($recipient->getData() == 'Dries') {
             $recipient->addType('test', 'var_dump');
         }
     }
