@@ -21,7 +21,7 @@ class RecipientTest extends \PHPUnit_Framework_TestCase
     {
         $name = 'name of the recipient';
         $recipient = new Recipient($name);
-        $this->assertEquals($recipient->getName(), $name);
+        $this->assertEquals($recipient->getData(), $name);
     }
 
     /**
@@ -30,7 +30,7 @@ class RecipientTest extends \PHPUnit_Framework_TestCase
      */
     public function testInfo()
     {
-        $recipient = new Recipient();
+        $recipient = new Recipient('dummy');
         $recipient->setInfo('some', 'thing');
         $this->assertEquals($recipient->getInfo('some'), 'thing');
     }
