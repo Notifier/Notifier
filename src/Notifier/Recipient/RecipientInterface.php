@@ -14,7 +14,7 @@ use Notifier\Message\MessageInterface;
 
 interface RecipientInterface
 {
-    public function getName();
+    public function getData();
     public function getTypes();
     public function getInfo($key);
     public function setInfo($key, $value);

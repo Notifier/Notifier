@@ -16,9 +16,9 @@ use Notifier\Message\MessageInterface;
 class Recipient implements RecipientInterface
 {
     /**
-     * @var string
+     * @var mixed
      */
-    protected $name = '';
+    protected $data;
 
     /**
      * @var array
@@ -28,31 +28,31 @@ class Recipient implements RecipientInterface
     protected $types = array();
 
     /**
-     * @param string $name
+     * @param mixed $data
      */
-    public function __construct($name = '')
+    public function __construct($data)
     {
-        $this->setName($name);
-    }
+			$this->setData($data);
+		}
 
     /**
-     * @param string $name
+     * @param mixed $data
      * @return Recipient $this
      */
-    public function setName($name)
+    public function setData($data)
     {
-        $this->name = $name;
+        $this->data = $data;
         return $this;
     }
 
     /**
      * Getter for the recipients name.
      *
-     * @return string
+     * @return mixed
      */
-    public function getName()
+    public function getData()
     {
-        return $this->name;
+        return $this->data;
     }
 
     /**
@@ -105,12 +105,8 @@ class Recipient implements RecipientInterface
         if (is_string($this->types)) {
             return $this->types == Notifier::TYPE_ALL;
         }
-
-        if (isset($this->types[$deliveryType]) && is_array($this->types[$deliveryType])) {
+        elseif (isset($this->types[$deliveryType]) && is_array($this->types[$deliveryType])) {
             return in_array($message->getType(), $this->types[$deliveryType]);
-        }
-        elseif (is_string($this->types)) {
-            return $this->types == Notifier::TYPE_ALL;
         }
 
         return false;
