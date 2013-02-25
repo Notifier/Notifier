@@ -37,7 +37,7 @@ The project is still in development and is not yet suited for production environ
 ## Handlers
 
  - _MailHandler_: Send the message via mail.
- - _NotifoHandler_: Send the message to a mobile device using the Notifo API.
+ - _SwiftMailerHandler_: Send the message using Swift Mailer.
  - _NullHandler_: Ignore the message completely.
  - _VarDumpHandler_: Send the output to the screen. (For debugging)
 
