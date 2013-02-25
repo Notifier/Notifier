@@ -21,6 +21,8 @@ class Notifier
 
     protected $processors = array();
 
+    protected $errors = array();
+
     /**
      * Pushes a handler on to the stack.
      *
@@ -50,7 +52,7 @@ class Notifier
      *
      * @param callable $processor
      */
-    public function pushProcessor(callable $processor)
+    public function pushProcessor($processor)
     {
         array_unshift($this->processors, $processor);
     }
@@ -73,6 +75,7 @@ class Notifier
      * Send the message.
      *
      * @param Message\MessageInterface $message
+     *
      * @return bool
      */
     public function sendMessage(Message\MessageInterface $message)
@@ -99,15 +102,38 @@ class Notifier
         }
 
         $bubble = false;
+        $this->errors = array();
         while (isset($this->handlers[$handlerKey]) && $bubble === false) {
             foreach ($message->getRecipients() as $recipient) {
                 if ($recipient->isHandling($message, $this->handlers[$handlerKey]->getDeliveryType())) {
                     $bubble = $this->handlers[$handlerKey]->handle($message, $recipient);
+                    $this->errors += $this->handlers[$handlerKey]->getErrors();
                 }
             }
             $handlerKey++;
         }
 
-        return true;
+        return count($this->errors) == 0;
     }
+
+    /**
+     * Return whether an error occurred.
+     *
+     * @return bool
+     */
+    public function isError()
+    {
+        return count($this->errors) > 0;
+    }
+
+    /**
+     * Get the list of errors.
+     *
+     * @return array
+     */
+    public function getErrors()
+    {
+        return $this->errors;
+    }
+
 }

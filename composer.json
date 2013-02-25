@@ -15,6 +15,12 @@
     "require": {
         "php": ">=5.3.4"
     },
+    "require-dev": {
+        "xenji/ProwlPHP": "1.0.3"
+    },
+    "suggest": {
+        "xenji/ProwlPHP": "Send messages to a Prowl App"
+    },
     "autoload": {
         "psr-0" : {
             "Notifier" : "src/"

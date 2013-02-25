@@ -46,6 +46,11 @@ abstract class AbstractHandler implements HandlerInterface
     protected $processors = array();
 
     /**
+     * @var array
+     */
+    protected $errors = array();
+
+    /**
      * @param string|array $types The types this handler handles.
      * @param Boolean $bubble Whether the messages that are handled can bubble up the stack or not
      */
@@ -80,11 +85,21 @@ abstract class AbstractHandler implements HandlerInterface
         return false;
     }
 
+    /**
+     * Create a default formatter.
+     *
+     * @return \Notifier\Formatter\NullFormatter
+     */
     public function getDefaultFormatter()
     {
         return new NullFormatter();
     }
 
+    /**
+     * Get the formatter. This will use the default as a fallback.
+     *
+     * @return \Notifier\Formatter\FormatterInterface|\Notifier\Formatter\NullFormatter
+     */
     public function getFormatter()
     {
         if (is_null($this->formatter)) {
@@ -93,6 +108,13 @@ abstract class AbstractHandler implements HandlerInterface
         return $this->formatter;
     }
 
+    /**
+     * Handle the message.
+     *
+     * @param \Notifier\Message\MessageInterface $message
+     * @param \Notifier\Recipient\RecipientInterface $recipient
+     * @return bool
+     */
     final public function handle(MessageInterface $message, RecipientInterface $recipient)
     {
         $message = $this->getFormatter()->format($message);
@@ -100,9 +122,34 @@ abstract class AbstractHandler implements HandlerInterface
         return false === $this->bubble;
     }
 
+    /**
+     * Get the delivery types this handler handles.
+     *
+     * @return string
+     */
     public function getDeliveryType()
     {
         return $this->deliveryType;
+    }
+
+    /**
+     * Return whether an error occurred.
+     *
+     * @return bool
+     */
+    public function isError()
+    {
+        return count($this->errors) > 0;
+    }
+
+    /**
+     * Get the list of errors.
+     *
+     * @return array
+     */
+    public function getErrors()
+    {
+        return $this->errors;
     }
 
     /**
