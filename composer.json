@@ -1,15 +1,21 @@
 {
-    "name": "notifier/notifier",
+    "name": "linkorb/notifier",
     "type": "library",
     "description": "Notifier, direct notifications.",
     "keywords": ["notification", "messages"],
-    "homepage": "https://github.com/nousefreak/Notifier",
+    "homepage": "https://github.com/linkorb/Notifier",
     "license": "MIT",
     "authors": [
         {
             "name": "Dries De Peuter",
             "email": "dries@nousefreak.be",
             "homepage": "http://nousefreak.be"
+        },
+        {
+            "name": "Hongliang",
+            "email": "h.wang@linkorb.com",
+            "homepage": "http://www.linkorb.com",
+            "role": "Development"
         }
     ],
     "require": {
