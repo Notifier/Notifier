@@ -37,7 +37,8 @@ The project is still in development and is not yet suited for production environ
 ## Handlers
 
  - _MailHandler_: Send the message via mail.
- - _SwiftMailerHandler_: Send the message using Swift Mailer.
+ - _SwiftMailerHandler_: Send the message using [Swift Mailer](http://swiftmailer.org/).
+ - _ProwlAppHandler_: Send the message to iOS using [Prowl](http://www.prowlapp.com/).
  - _NullHandler_: Ignore the message completely.
  - _VarDumpHandler_: Send the output to the screen. (For debugging)
 
