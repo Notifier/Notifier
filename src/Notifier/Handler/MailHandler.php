@@ -23,8 +23,9 @@ class MailHandler extends AbstractHandler
     protected $headers;
 
     /**
-     * @param string|array $types The types this handler handles.
-     * @param Boolean $bubble Whether the messages that are handled can bubble up the stack or not
+     * @param array|string $types The types this handler handles.
+     * @param array $headers
+     * @param boolean $bubble Whether the messages that are handled can bubble up the stack or not
      */
     public function __construct($types = Notifier::TYPE_ALL, $headers = array(), $bubble = true)
     {
@@ -34,7 +35,7 @@ class MailHandler extends AbstractHandler
     }
 
     /**
-     * {@inheritdocs}
+     * {@inheritDocs}
      */
     protected function send(MessageInterface $message, RecipientInterface $recipient)
     {

@@ -22,32 +22,39 @@ class PushoverHandlerTest extends \PHPUnit_Framework_TestCase
     private $pushover_apikey;
     // Userkey for recipient
     private $pushover_userkey;
-    
-    public function testHandler()
+
+    public function setUp()
     {
+        if (!getenv('PUSHOVER_APIKEY') || !getenv('PUSHOVER_USERKEY')) {
+            $this->markTestSkipped('No pushover api key found.');
+        }
         $this->pushover_apikey = getenv('PUSHOVER_APIKEY');
         $this->pushover_userkey = getenv('PUSHOVER_USERKEY');
-        echo "APIKEY: " . $this->pushover_apikey . "\n";
-        echo "USERKEY: " . $this->pushover_userkey . "\n";
+    }
+
+    public function testHandler()
+    {
         $notifier = new Notifier();
-        $notifier->pushProcessor(function($message) {
-            $recipients = $message->getRecipients();
-            // only set the filters just before sending.
-            foreach ($recipients as &$recipient) {
-                if ($recipient->getData() == 'Dries') {
-                    $recipient->addType('test', 'pushover');
-                    $recipient->setInfo('pushover.user_key', $this->pushover_userkey);
+        $notifier->pushProcessor(
+            function ($message) {
+                $recipients = $message->getRecipients();
+                // only set the filters just before sending.
+                foreach ($recipients as &$recipient) {
+                    if ($recipient->getData() == 'Dries') {
+                        $recipient->addType('test', 'pushover');
+                        $recipient->setInfo('pushover.user_key', $this->pushover_userkey);
+                    }
                 }
+                return $message;
             }
-            return $message;
-        });
-        
+        );
+
         $notifier->pushHandler(new PushoverHandler($this->pushover_apikey, Notifier::TYPE_ALL, 'App Name'));
 
         $message = new Message('test');
         $message->setSubject('subject');
         $message->setContent('content');
         $message->addRecipient(new Recipient('Dries'));
-        $notifier->sendMessage($message);
+        $this->assertTrue($notifier->sendMessage($message));
     }
 }

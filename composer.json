@@ -16,6 +16,7 @@
         "php": ">=5.3.4"
     },
     "require-dev": {
+        "swiftmailer/swiftmailer": "v5.0.0",
         "xenji/ProwlPHP": "1.0.3",
         "linkorb/pushover": "1.*"
     },

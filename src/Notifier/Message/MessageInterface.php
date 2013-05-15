@@ -20,6 +20,14 @@ interface MessageInterface
      * @return RecipientInterface[]
      */
     public function &getRecipients();
+
+    /**
+     * @return string
+     */
     public function getSubject();
+
+    /**
+     * @return string
+     */
     public function getContent();
 }

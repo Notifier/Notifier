@@ -78,8 +78,7 @@ abstract class AbstractHandler implements HandlerInterface
     {
         if (is_array($this->types)) {
             return in_array($message->getType(), $this->types);
-        }
-        elseif (is_string($this->types)) {
+        } elseif (is_string($this->types)) {
             return $this->types == Notifier::TYPE_ALL;
         }
         return false;

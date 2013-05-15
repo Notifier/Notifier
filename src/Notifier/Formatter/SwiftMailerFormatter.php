@@ -15,16 +15,16 @@ use Notifier\Message\MessageInterface;
 class SwiftMailerFormatter implements FormatterInterface
 {
 
-	function format(MessageInterface $message)
-	{
-		return $message;
-	}
+    public function format(MessageInterface $message)
+    {
+        return $message;
+    }
 
-	function formatBatch( array $messages )
-	{
-		foreach ($messages as &$message) {
-			$message = $this->format($message);
-		}
-		return $messages;
-	}
+    public function formatBatch(array $messages)
+    {
+        foreach ($messages as &$message) {
+            $message = $this->format($message);
+        }
+        return $messages;
+    }
 }
