@@ -3,20 +3,23 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "dfe5d4ed01a7f60286577528c630a3fe",
+    "hash": "88549690c85ba73fc698e87f9c9fd039",
     "packages": [
+
+    ],
+    "packages-dev": [
         {
-            "name": "fusesource/stomp-php",
-            "version": "2.0.1",
+            "name": "xenji/prowlphp",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
-                "url": "git://github.com/dejanb/stomp-php.git",
-                "reference": "2.0.1"
+                "url": "git://github.com/xenji/ProwlPHP.git",
+                "reference": "1.0.3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/dejanb/stomp-php/zipball/2.0.1",
-                "reference": "2.0.1",
+                "url": "https://github.com/xenji/ProwlPHP/zipball/1.0.3",
+                "reference": "1.0.3",
                 "shasum": ""
             },
             "require": {
@@ -25,7 +28,7 @@
             "type": "library",
             "autoload": {
                 "psr-0": {
-                    "FuseSource": "src/main"
+                    "Prowl": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -34,28 +37,20 @@
             ],
             "authors": [
                 {
-                    "name": "Dejan Bosnanac",
-                    "email": "dejan@nighttale.net",
-                    "homepage": "http://www.nighttale.net"
-                },
-                {
-                    "name": "Sören Rohweder",
-                    "email": "s.rohweder@blage.net",
-                    "homepage": "http://www.monofone.de"
+                    "name": "Mario Mueller",
+                    "email": "mario@xenji.com",
+                    "homepage": "http://xenji.com"
                 }
             ],
-            "description": "stomp support for PHP",
-            "homepage": "http://github.com/dejanb/stomp-php",
+            "description": "PHP library to access the webserives of Prowl (http://www.prowlapp.com/)",
+            "homepage": "https://github.com/xenji/ProwlPHP",
             "keywords": [
-                "activeMQ",
-                "jms",
-                "messaging",
-                "stomp"
+                "api",
+                "webservices"
             ],
-            "time": "2012-07-13 06:40:27"
+            "time": "2012-03-13 07:22:21"
         }
     ],
-    "packages-dev": null,
     "aliases": [
 
     ],

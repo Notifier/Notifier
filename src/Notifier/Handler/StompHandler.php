@@ -33,9 +33,9 @@ class StompHandler extends AbstractHandler
 	 */
 	public function __construct($server = 'localhost', $port = 61613, $clientid = 'mystomp', $destination = 'undefined', $types = Notifier::TYPE_ALL, $bubble = true)
     {
-        $this->stompserver      = $server;
-        $this->stompport        = $port;
-        $this->stompclientid    = $clientid;
+        $this->stompserver = $server;
+        $this->stompport = $port;
+        $this->stompclientid = $clientid;
         $this->stompdestination = $destination;
         parent::__construct($types, $bubble);
 	}
@@ -59,9 +59,9 @@ class StompHandler extends AbstractHandler
 
     private function sendStomp(MessageInterface $message, RecipientInterface $recipient)
     {
-        $stomp	= $this->connectSTOMP();
-        $frame	= new Frame('SEND', $this->stompheaders, $message->getContent());
-        $res	= $stomp->send('/queue/' . $this->stompdestination, $frame, array(), true);
+        $stomp = $this->connectSTOMP();
+        $frame = new Frame('SEND', $this->stompheaders, $message->getContent());
+        $res = $stomp->send('/queue/' . $this->stompdestination, $frame, array(), true);
         return $res;
     }
 
