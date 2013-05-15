@@ -16,10 +16,12 @@
         "php": ">=5.3.4"
     },
     "require-dev": {
-        "xenji/ProwlPHP": "1.0.3"
+        "xenji/ProwlPHP": "1.0.3",
+        "linkorb/pushover": "1.*"
     },
     "suggest": {
-        "xenji/ProwlPHP": "Send messages to a Prowl App"
+        "xenji/ProwlPHP": "Send messages to a Prowl App",
+        "linkorb/pushover": "Send messages through Pushover.net"
     },
     "autoload": {
         "psr-0" : {
