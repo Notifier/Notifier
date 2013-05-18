@@ -19,7 +19,7 @@
         }
     ],
     "require": {
-        "php": ">=5.3.4"
+        "php": ">=5.3.3"
     },
     "require-dev": {
         "xenji/ProwlPHP": "1.0.3"
