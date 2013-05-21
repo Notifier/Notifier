@@ -11,5 +11,7 @@
         <env name="PROWLAPP_APIKEY" value=""/>
         <env name="PUSHOVER_APIKEY" value=""/>
         <env name="PUSHOVER_USERKEY" value=""/>
+        <env name="STOMP_SERVER" value=""/>
+        <env name="STOMP_PORT" value=""/>
     </php>
 </phpunit>

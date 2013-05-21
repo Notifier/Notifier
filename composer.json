@@ -10,10 +10,16 @@
             "name": "Dries De Peuter",
             "email": "dries@nousefreak.be",
             "homepage": "http://nousefreak.be"
+        },
+        {
+            "name": "Hongliang",
+            "email": "h.wang@linkorb.com",
+            "homepage": "http://www.linkorb.com",
+            "role": "Development"
         }
     ],
     "require": {
-        "php": ">=5.3.4"
+        "php": ">=5.3.3"
     },
     "require-dev": {
         "swiftmailer/swiftmailer": "v5.0.0",
@@ -22,6 +28,7 @@
     },
     "suggest": {
         "xenji/ProwlPHP": "Send messages to a Prowl App",
+        "fusesource/stomp-php" : "STOMP PHP client",
         "linkorb/pushover": "Send messages through Pushover.net"
     },
     "autoload": {
