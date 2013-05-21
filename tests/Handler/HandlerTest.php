@@ -8,7 +8,6 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Notifier\Tests\Handler;
 
 use Notifier\Formatter\FormatterInterface;

@@ -44,6 +44,7 @@ class Notifier
         if (!count($this->handlers)) {
             throw new \LogicException('You tried to pop from an empty handler stack.');
         }
+
         return array_shift($this->handlers);
     }
 
@@ -68,6 +69,7 @@ class Notifier
         if (!count($this->processors)) {
             throw new \LogicException('You tried to pop from an empty processor stack.');
         }
+
         return array_shift($this->processors);
     }
 

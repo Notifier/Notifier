@@ -36,12 +36,13 @@ class Recipient implements RecipientInterface
     }
 
     /**
-     * @param mixed $data
+     * @param  mixed     $data
      * @return Recipient $this
      */
     public function setData($data)
     {
         $this->data = $data;
+
         return $this;
     }
 
@@ -73,6 +74,7 @@ class Recipient implements RecipientInterface
         if (isset($this->info[$key])) {
             return $this->info[$key];
         }
+
         return false;
     }
 

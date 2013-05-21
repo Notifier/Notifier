@@ -8,7 +8,6 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Notifier\Tests\Handler;
 
 use Notifier\Handler\StompHandler;
@@ -42,6 +41,7 @@ class StompHandlerTest extends \PHPUnit_Framework_TestCase
                         $recipient->addType('test', 'stomp');
                     }
                 }
+
                 return $message;
             }
         );

@@ -25,6 +25,7 @@ class SwiftMailerFormatter implements FormatterInterface
         foreach ($messages as &$message) {
             $message = $this->format($message);
         }
+
         return $messages;
     }
 }

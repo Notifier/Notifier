@@ -24,12 +24,12 @@ class StompHandler extends AbstractHandler
     protected $stompheaders = array();
 
     /**
-     * @param String $server The STOMP server.
-     * @param Int $port The port number of the STOMP server.
-     * @param String $clientid The client id.
-     * @param String $destination The desitnation queue.
-     * @param string|array $types types
-     * @param boolean $bubble Bubble or not.
+     * @param String       $server      The STOMP server.
+     * @param Int          $port        The port number of the STOMP server.
+     * @param String       $clientid    The client id.
+     * @param String       $destination The desitnation queue.
+     * @param string|array $types       types
+     * @param boolean      $bubble      Bubble or not.
      */
     public function __construct($server = 'localhost', $port = 61613, $clientid = 'mystomp', $destination = 'undefined', $types = Notifier::TYPE_ALL, $bubble = true)
     {
@@ -54,6 +54,7 @@ class StompHandler extends AbstractHandler
         } catch (StompException $e) {
             throw new \InvalidArgumentException($e->getMessage());
         }
+
         return $stomp;
     }
 
@@ -62,6 +63,7 @@ class StompHandler extends AbstractHandler
         $stomp = $this->connectSTOMP();
         $frame = new Frame('SEND', $this->stompheaders, $message->getContent());
         $res = $stomp->send('/queue/' . $this->stompdestination, $frame, array(), true);
+
         return $res;
     }
 

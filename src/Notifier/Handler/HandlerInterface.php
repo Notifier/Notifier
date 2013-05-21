@@ -19,7 +19,7 @@ interface HandlerInterface
     /**
      * Check if the handler will handle this type of message.
      *
-     * @param \Notifier\Message\MessageInterface $message
+     * @param  \Notifier\Message\MessageInterface $message
      * @return mixed
      */
     public function isHandling(MessageInterface $message);
@@ -27,8 +27,8 @@ interface HandlerInterface
     /**
      * Trigger the handler to handle the provided message.
      *
-     * @param \Notifier\Message\MessageInterface $message
-     * @return bool True means that this handler handled the record, and that bubbling is not permitted.
+     * @param  \Notifier\Message\MessageInterface $message
+     * @return bool                               True means that this handler handled the record, and that bubbling is not permitted.
      *              False means the record was either not processed or that this handler allows bubbling.
      */
     public function handle(MessageInterface $message, RecipientInterface $recipient);

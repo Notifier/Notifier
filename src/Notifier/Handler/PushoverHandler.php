@@ -21,9 +21,9 @@ class PushoverHandler extends AbstractHandler
     protected $userkey;
 
     /**
-     * @param String $token The API token from pushover.net
-     * @param array|bool|string $types types
-     * @param boolean $bubble Bubble or not.
+     * @param String            $token  The API token from pushover.net
+     * @param array|bool|string $types  types
+     * @param boolean           $bubble Bubble or not.
      */
     public function __construct($token, $types = Notifier::TYPE_ALL, $bubble = true)
     {
@@ -32,8 +32,8 @@ class PushoverHandler extends AbstractHandler
     }
 
     /**
-     * @param MessageInterface $message
-     * @param RecipientInterface $recipient
+     * @param  MessageInterface   $message
+     * @param  RecipientInterface $recipient
      * @return mixed|void
      */
     protected function send(MessageInterface $message, RecipientInterface $recipient)

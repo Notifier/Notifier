@@ -51,8 +51,8 @@ abstract class AbstractHandler implements HandlerInterface
     protected $errors = array();
 
     /**
-     * @param string|array $types The types this handler handles.
-     * @param Boolean $bubble Whether the messages that are handled can bubble up the stack or not
+     * @param string|array $types  The types this handler handles.
+     * @param Boolean      $bubble Whether the messages that are handled can bubble up the stack or not
      */
     public function __construct($types = Notifier::TYPE_ALL, $bubble = true)
     {
@@ -71,7 +71,7 @@ abstract class AbstractHandler implements HandlerInterface
     /**
      * Check if the handler handles the
      *
-     * @param MessageInterface $message
+     * @param  MessageInterface $message
      * @return bool
      */
     public function isHandling(MessageInterface $message)
@@ -81,6 +81,7 @@ abstract class AbstractHandler implements HandlerInterface
         } elseif (is_string($this->types)) {
             return $this->types == Notifier::TYPE_ALL;
         }
+
         return false;
     }
 
@@ -104,20 +105,22 @@ abstract class AbstractHandler implements HandlerInterface
         if (is_null($this->formatter)) {
             $this->formatter = $this->getDefaultFormatter();
         }
+
         return $this->formatter;
     }
 
     /**
      * Handle the message.
      *
-     * @param \Notifier\Message\MessageInterface $message
-     * @param \Notifier\Recipient\RecipientInterface $recipient
+     * @param  \Notifier\Message\MessageInterface     $message
+     * @param  \Notifier\Recipient\RecipientInterface $recipient
      * @return bool
      */
     final public function handle(MessageInterface $message, RecipientInterface $recipient)
     {
         $message = $this->getFormatter()->format($message);
         $this->send($message, $recipient);
+
         return false === $this->bubble;
     }
 
@@ -154,8 +157,8 @@ abstract class AbstractHandler implements HandlerInterface
     /**
      * Send to a single recipient.
      *
-     * @param \Notifier\Message\MessageInterface $message
-     * @param \Notifier\Recipient\RecipientInterface $recipient
+     * @param  \Notifier\Message\MessageInterface     $message
+     * @param  \Notifier\Recipient\RecipientInterface $recipient
      * @return mixed
      */
     abstract protected function send(MessageInterface $message, RecipientInterface $recipient);

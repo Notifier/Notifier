@@ -8,14 +8,12 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Notifier\Tests\Handler;
 
 use Notifier\Handler\ProwlAppHandler;
 use Notifier\Message\Message;
 use Notifier\Notifier;
 use Notifier\Recipient\Recipient;
-
 
 class ProwlAppHandlerTest extends \PHPUnit_Framework_TestCase
 {
@@ -45,6 +43,7 @@ class ProwlAppHandlerTest extends \PHPUnit_Framework_TestCase
                         $recipient->setInfo('prowl_app.api_key', $this->apiKey);
                     }
                 }
+
                 return $message;
             }
         );

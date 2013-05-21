@@ -8,7 +8,6 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Notifier\Handler;
 
 use Notifier\Notifier;
@@ -28,7 +27,6 @@ class ProwlAppHandler extends AbstractHandler
         $this->appName = $appName;
         parent::__construct($types, $bubble);
     }
-
 
     protected function send(MessageInterface $message, RecipientInterface $recipient)
     {

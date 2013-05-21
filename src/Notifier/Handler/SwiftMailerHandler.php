@@ -20,10 +20,10 @@ class SwiftMailerHandler extends MailHandler
     protected $message;
 
     /**
-     * @param \Swift_Mailer $mailer The mailer to use
-     * @param callback|\Swift_Message $message An example message for real messages, only the body and title will be replaced
-     * @param array|callback $types Types the handler handles. If empty it will handle all.
-     * @param Boolean $bubble Whether the messages that are handled can bubble up the stack or not
+     * @param  \Swift_Mailer             $mailer  The mailer to use
+     * @param  callback|\Swift_Message   $message An example message for real messages, only the body and title will be replaced
+     * @param  array|callback            $types   Types the handler handles. If empty it will handle all.
+     * @param  Boolean                   $bubble  Whether the messages that are handled can bubble up the stack or not
      * @throws \InvalidArgumentException
      */
     public function __construct(\Swift_Mailer $mailer, $message, $types = array(), $bubble = true)

@@ -8,7 +8,6 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Notifier\Tests\Handler;
 
 use Notifier\Handler\PushoverHandler;
@@ -45,6 +44,7 @@ class PushoverHandlerTest extends \PHPUnit_Framework_TestCase
                         $recipient->setInfo('pushover.user_key', $this->pushover_userkey);
                     }
                 }
+
                 return $message;
             }
         );
