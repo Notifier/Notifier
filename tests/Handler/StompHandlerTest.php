@@ -46,7 +46,7 @@ class StompHandlerTest extends \PHPUnit_Framework_TestCase
             }
         );
 
-        $notifier->pushHandler( new StompHandler($this->stompserver, $this->stompport) );
+        $notifier->pushHandler(new StompHandler($this->stompserver, $this->stompport));
 
         $message = new Message('test');
         $message->setSubject('subject');

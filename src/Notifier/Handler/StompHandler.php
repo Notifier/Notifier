@@ -38,11 +38,11 @@ class StompHandler extends AbstractHandler
         $this->stompclientid = $clientid;
         $this->stompdestination = $destination;
         parent::__construct($types, $bubble);
-	}
+    }
 
     protected function send(MessageInterface $message, RecipientInterface $recipient)
     {
-       return $this->sendStomp($message, $recipient);
+        return $this->sendStomp($message, $recipient);
     }
 
     private function connectSTOMP()
@@ -51,11 +51,11 @@ class StompHandler extends AbstractHandler
             $stomp = new Stomp('tcp://' . $this->stompserver . ':' . $this->stompport);
             $stomp->clientId = $this->stompclientid;
             $stomp->connect();
-        } catch(StompException $e) {
+        } catch (StompException $e) {
             throw new \InvalidArgumentException($e->getMessage());
         }
         return $stomp;
-	}
+    }
 
     private function sendStomp(MessageInterface $message, RecipientInterface $recipient)
     {
@@ -69,5 +69,4 @@ class StompHandler extends AbstractHandler
     {
         $this->stompheaders = $headers;
     }
-
 }
