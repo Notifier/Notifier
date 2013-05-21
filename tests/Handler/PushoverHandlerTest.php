@@ -2,7 +2,7 @@
 /**
  * This file is part of the Notifier package.
  *
- * (c) Dries De Peuter <dries@nousefreak.be>
+ * (c) Joost Faassen <j.faassen@linkorb.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,28 +11,28 @@
 
 namespace Notifier\Tests\Handler;
 
-use Notifier\Handler\ProwlAppHandler;
+use Notifier\Handler\PushoverHandler;
 use Notifier\Message\Message;
 use Notifier\Notifier;
 use Notifier\Recipient\Recipient;
 
-
-class ProwlAppHandlerTest extends \PHPUnit_Framework_TestCase
+class PushoverHandlerTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @var string The recipient's api key.
-     */
-    private $apiKey;
+    // Apikey for your app
+    private $pushover_apikey;
+    // Userkey for recipient
+    private $pushover_userkey;
 
     public function setUp()
     {
-        if (!getenv('PROWLAPP_APIKEY')) {
-            $this->markTestSkipped('No prowlapp api key found.');
+        if (!getenv('PUSHOVER_APIKEY') || !getenv('PUSHOVER_USERKEY')) {
+            $this->markTestSkipped('No pushover api key found.');
         }
-        $this->apiKey = getenv('PROWLAPP_APIKEY');
+        $this->pushover_apikey = getenv('PUSHOVER_APIKEY');
+        $this->pushover_userkey = getenv('PUSHOVER_USERKEY');
     }
 
-    public function testFormatter()
+    public function testHandler()
     {
         $notifier = new Notifier();
         $notifier->pushProcessor(
@@ -41,14 +41,15 @@ class ProwlAppHandlerTest extends \PHPUnit_Framework_TestCase
                 // only set the filters just before sending.
                 foreach ($recipients as &$recipient) {
                     if ($recipient->getData() == 'Dries') {
-                        $recipient->addType('test', 'prowl_app');
-                        $recipient->setInfo('prowl_app.api_key', $this->apiKey);
+                        $recipient->addType('test', 'pushover');
+                        $recipient->setInfo('pushover.user_key', $this->pushover_userkey);
                     }
                 }
                 return $message;
             }
         );
-        $notifier->pushHandler(new ProwlAppHandler(Notifier::TYPE_ALL, 'App Name'));
+
+        $notifier->pushHandler(new PushoverHandler($this->pushover_apikey, Notifier::TYPE_ALL, 'App Name'));
 
         $message = new Message('test');
         $message->setSubject('subject');

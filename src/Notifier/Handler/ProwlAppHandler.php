@@ -14,6 +14,8 @@ namespace Notifier\Handler;
 use Notifier\Notifier;
 use Notifier\Message\MessageInterface;
 use Notifier\Recipient\RecipientInterface;
+use Prowl\Connector;
+use Prowl\Message;
 
 class ProwlAppHandler extends AbstractHandler
 {
@@ -30,16 +32,18 @@ class ProwlAppHandler extends AbstractHandler
 
     protected function send(MessageInterface $message, RecipientInterface $recipient)
     {
-        $oProwl = new \Prowl\Connector();
-        $oMsg = new \Prowl\Message();
+        $oProwl = new Connector();
+        $oMsg = new Message();
 
         try {
             $oProwl->setIsPostRequest(true);
             $oMsg->setPriority(0);
 
-            $oProwl->setFilterCallback(function($sText) {
-                return $sText;
-            });
+            $oProwl->setFilterCallback(
+                function ($sText) {
+                    return $sText;
+                }
+            );
 
             $oMsg->addApiKey($recipient->getInfo('prowl_app.api_key'));
             $oMsg->setEvent($message->getSubject());

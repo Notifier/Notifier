@@ -32,8 +32,8 @@ class Recipient implements RecipientInterface
      */
     public function __construct($data)
     {
-			$this->setData($data);
-		}
+        $this->setData($data);
+    }
 
     /**
      * @param mixed $data
@@ -98,14 +98,14 @@ class Recipient implements RecipientInterface
      * Check if the recipient wants the message.
      *
      * @param MessageInterface $message
+     * @param $deliveryType
      * @return bool
      */
     public function isHandling(MessageInterface $message, $deliveryType)
     {
         if (is_string($this->types)) {
             return $this->types == Notifier::TYPE_ALL;
-        }
-        elseif (isset($this->types[$deliveryType]) && is_array($this->types[$deliveryType])) {
+        } elseif (isset($this->types[$deliveryType]) && is_array($this->types[$deliveryType])) {
             return in_array($message->getType(), $this->types[$deliveryType]);
         }
 

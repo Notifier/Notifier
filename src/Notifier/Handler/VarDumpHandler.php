@@ -17,6 +17,7 @@ use Notifier\Recipient\RecipientInterface;
 class VarDumpHandler extends AbstractHandler
 {
     protected $deliveryType = 'var_dump';
+
     protected function send(MessageInterface $message, RecipientInterface $recipient)
     {
         var_dump($message);
