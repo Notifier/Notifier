@@ -24,6 +24,7 @@
     "require-dev": {
         "swiftmailer/swiftmailer": "v5.0.0",
         "xenji/ProwlPHP": "1.0.3",
+        "fusesource/stomp-php": "2.1.0",
         "linkorb/pushover": "1.*"
     },
     "suggest": {

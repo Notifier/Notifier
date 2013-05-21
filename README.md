@@ -40,6 +40,7 @@ The project is still in development and is not yet suited for production environ
  - _SwiftMailerHandler_: Send the message using [Swift Mailer](http://swiftmailer.org/).
  - _ProwlAppHandler_: Send the message to iOS using [Prowl](http://www.prowlapp.com/).
  - _PushoverHandler_: Send the message to iOS/android using [Pushover](http://pushover.net/).
+ - _StompHandler_: Send the message using [STOMP](http://stomp.fusesource.org/).
  - _NullHandler_: Ignore the message completely.
  - _VarDumpHandler_: Send the output to the screen. (For debugging)
 
