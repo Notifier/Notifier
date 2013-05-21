@@ -30,7 +30,7 @@ class StompHandler extends AbstractHandler
      * @param String $destination The desitnation queue.
      * @param string|array $types types
      * @param boolean $bubble Bubble or not.
-     * /
+     */
     public function __construct($server = 'localhost', $port = 61613, $clientid = 'mystomp', $destination = 'undefined', $types = Notifier::TYPE_ALL, $bubble = true)
     {
         $this->stompserver = $server;
