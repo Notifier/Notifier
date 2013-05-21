@@ -9,7 +9,7 @@ Notifier is available on Packagist (notifier/notifier).
 ```json
 {
     "require": {
-        "notifier/notifier": "0.1.*"
+        "notifier/notifier": "0.4.*"
     }
 }
 ```
