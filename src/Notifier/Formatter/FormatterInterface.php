@@ -10,10 +10,16 @@
 
 namespace Notifier\Formatter;
 
+use Notifier\Message\MessageInterface;
+
 /**
  * @author Dries De Peuter <dries@nousefreak.be>
  */
 interface FormatterInterface
 {
-
+    /**
+     * @param MessageInterface $message
+     * @return MessageInterface
+     */
+    public function format(MessageInterface $message);
 }

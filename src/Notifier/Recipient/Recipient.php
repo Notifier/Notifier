@@ -9,6 +9,7 @@
  */
 
 namespace Notifier\Recipient;
+
 use Notifier\Message\MessageInterface;
 use Notifier\Notifier;
 
