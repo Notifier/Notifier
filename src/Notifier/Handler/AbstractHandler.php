@@ -88,7 +88,7 @@ abstract class AbstractHandler implements HandlerInterface
     /**
      * Create a default formatter.
      *
-     * @return \Notifier\Formatter\NullFormatter
+     * @return NullFormatter
      */
     public function getDefaultFormatter()
     {
@@ -112,14 +112,25 @@ abstract class AbstractHandler implements HandlerInterface
     /**
      * Handle the message.
      *
-     * @param  \Notifier\Message\MessageInterface     $message
-     * @param  \Notifier\Recipient\RecipientInterface $recipient
+     * @param  MessageInterface     $message
+     * @param  RecipientInterface[] $recipients
      * @return bool
      */
-    final public function handle(MessageInterface $message, RecipientInterface $recipient)
+    final public function handle(MessageInterface $message, array $recipients)
     {
+        if (!count($recipients)) {
+            return false;
+        }
+
         $message = $this->getFormatter()->format($message);
-        $this->send($message, $recipient);
+
+        if ($message->sendBulk()) {
+            $this->sendBulk($message, $recipients);
+        } else {
+            foreach ($recipients as $recipient) {
+                $this->sendOne($message, $recipient);
+            }
+        }
 
         return false === $this->bubble;
     }
@@ -157,10 +168,21 @@ abstract class AbstractHandler implements HandlerInterface
     /**
      * Send to a single recipient.
      *
-     * @param  \Notifier\Message\MessageInterface     $message
-     * @param  \Notifier\Recipient\RecipientInterface $recipient
-     * @return mixed
+     * @param MessageInterface   $message
+     * @param RecipientInterface $recipient
      */
-    abstract protected function send(MessageInterface $message, RecipientInterface $recipient);
+    abstract protected function sendOne(MessageInterface $message, RecipientInterface $recipient);
 
+    /**
+     * Send to a single recipient.
+     *
+     * @param MessageInterface     $message
+     * @param RecipientInterface[] $recipients
+     */
+    protected function sendBulk(MessageInterface $message, array $recipients)
+    {
+        foreach ($recipients as $recipient) {
+            $this->sendOne($message, $recipient);
+        }
+    }
 }

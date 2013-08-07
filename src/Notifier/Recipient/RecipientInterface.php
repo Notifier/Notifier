@@ -9,9 +9,11 @@
  */
 
 namespace Notifier\Recipient;
-
 use Notifier\Message\MessageInterface;
 
+/**
+ * @author Dries De Peuter <dries@nousefreak.be>
+ */
 interface RecipientInterface
 {
     public function getData();
@@ -22,5 +24,5 @@ interface RecipientInterface
 
     public function setInfo($key, $value);
 
-    public function isHandling(MessageInterface $message, $deliveryType);
+    public function isAccepting(MessageInterface $message, $deliveryType);
 }

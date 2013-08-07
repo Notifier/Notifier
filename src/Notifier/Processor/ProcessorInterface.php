@@ -8,17 +8,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Notifier\Formatter;
+namespace Notifier\Processor;
 
 use Notifier\Message\MessageInterface;
 
 /**
  * @author Dries De Peuter <dries@nousefreak.be>
  */
-class NullFormatter implements FormatterInterface
+interface ProcessorInterface
 {
-    public function format(MessageInterface $message)
-    {
-        return $message;
-    }
+    public function __invoke(MessageInterface $message);
 }

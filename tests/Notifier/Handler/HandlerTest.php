@@ -8,11 +8,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Notifier\Tests\Handler;
+namespace Notifier\Handler;
 
 use Notifier\Formatter\FormatterInterface;
 use Notifier\Handler\NullHandler;
 
+/**
+ * @author Dries De Peuter <dries@nousefreak.be>
+ */
 class HandlerTest extends \PHPUnit_Framework_TestCase
 {
     public function testFormatter()

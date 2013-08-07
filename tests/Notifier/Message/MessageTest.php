@@ -8,11 +8,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Notifier\Tests\Message;
+namespace Notifier\Message;
 
 use Notifier\Message\Message;
 use Notifier\Recipient\Recipient;
 
+/**
+ * @author Dries De Peuter <dries@nousefreak.be>
+ */
 class MessageTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -31,8 +34,8 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Notifier\Message::__construct
-     * @covers Notifier\Message::getType
+     * @covers Notifier\Message\Message::__construct
+     * @covers Notifier\Message\Message::getType
      */
     public function testName()
     {
@@ -42,8 +45,8 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Notifier\Message::addRecipient
-     * @covers Notifier\Message::getRecipients
+     * @covers Notifier\Message\Message::addRecipient
+     * @covers Notifier\Message\Message::getRecipients
      */
     public function testAddRecipient()
     {
@@ -53,8 +56,8 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Notifier\Message::addRecipient
-     * @covers Notifier\Message::getRecipients
+     * @covers Notifier\Message\Message::addRecipient
+     * @covers Notifier\Message\Message::getRecipients
      */
     public function testEmptyRecipients()
     {
@@ -62,8 +65,8 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Notifier\Message::setSubject
-     * @covers Notifier\Message::getSubject
+     * @covers Notifier\Message\Message::setSubject
+     * @covers Notifier\Message\Message::getSubject
      */
     public function testSubject()
     {
@@ -72,8 +75,8 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Notifier\Message::setSubject
-     * @covers Notifier\Message::getSubject
+     * @covers Notifier\Message\Message::setSubject
+     * @covers Notifier\Message\Message::getSubject
      */
     public function testContent()
     {

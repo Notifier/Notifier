@@ -10,16 +10,19 @@
 
 namespace Notifier\Handler;
 
+use Notifier\Formatter\FormatterInterface;
 use Notifier\Message\MessageInterface;
 use Notifier\Recipient\RecipientInterface;
-use Notifier\Formatter\FormatterInterface;
 
+/**
+ * @author Dries De Peuter <dries@nousefreak.be>
+ */
 interface HandlerInterface
 {
     /**
      * Check if the handler will handle this type of message.
      *
-     * @param  \Notifier\Message\MessageInterface $message
+     * @param  MessageInterface $message
      * @return mixed
      */
     public function isHandling(MessageInterface $message);
@@ -27,11 +30,12 @@ interface HandlerInterface
     /**
      * Trigger the handler to handle the provided message.
      *
-     * @param  \Notifier\Message\MessageInterface $message
-     * @return bool                               True means that this handler handled the record, and that bubbling is not permitted.
+     * @param  MessageInterface     $message
+     * @param  RecipientInterface[] $recipient
+     * @return bool                 True means that this handler handled the record, and that bubbling is not permitted.
      *              False means the record was either not processed or that this handler allows bubbling.
      */
-    public function handle(MessageInterface $message, RecipientInterface $recipient);
+    public function handle(MessageInterface $message, array $recipient);
 
     /**
      * Get the formatter for the current handler.
@@ -39,4 +43,6 @@ interface HandlerInterface
      * @return FormatterInterface
      */
     public function getFormatter();
+
+    public function getDeliveryType();
 }

@@ -9,10 +9,12 @@
  */
 
 namespace Notifier\Recipient;
-
-use Notifier\Notifier;
 use Notifier\Message\MessageInterface;
+use Notifier\Notifier;
 
+/**
+ * @author Dries De Peuter <dries@nousefreak.be>
+ */
 class Recipient implements RecipientInterface
 {
     /**
@@ -99,11 +101,11 @@ class Recipient implements RecipientInterface
     /**
      * Check if the recipient wants the message.
      *
-     * @param MessageInterface $message
-     * @param $deliveryType
+     * @param  MessageInterface $message
+     * @param  string           $deliveryType
      * @return bool
      */
-    public function isHandling(MessageInterface $message, $deliveryType)
+    public function isAccepting(MessageInterface $message, $deliveryType)
     {
         if (is_string($this->types)) {
             return $this->types == Notifier::TYPE_ALL;

@@ -9,4 +9,4 @@
  */
 
 $loader = require_once __DIR__ . "/../vendor/autoload.php";
-$loader->add('Notifier\\', __DIR__);
+$loader->add('Notifier', __DIR__);

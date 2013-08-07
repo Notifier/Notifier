@@ -8,16 +8,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Notifier\Tests;
+namespace Notifier;
 
-use PHPUnit_Framework_TestCase;
-use Notifier\Recipient\Recipient;
+use Notifier\Handler\NullHandler;
 use Notifier\Handler\VarDumpHandler;
 use Notifier\Message\Message;
-use Notifier\Handler\NullHandler;
-use Notifier\Notifier;
+use Notifier\Recipient\Recipient;
 
-class NotifierTest extends PHPUnit_Framework_TestCase
+/**
+ * @author Dries De Peuter <dries@nousefreak.be>
+ */
+class NotifierTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Notifier
@@ -35,8 +36,8 @@ class NotifierTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Notifier::pushHandler
-     * @covers Notifier::popHandler
+     * @covers Notifier\Notifier::pushHandler
+     * @covers Notifier\Notifier::popHandler
      */
     public function testPushHandler()
     {
@@ -46,7 +47,8 @@ class NotifierTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Notifier::sendMessage
+     * @covers Notifier\Notifier::sendMessage
+     * @covers Notifier\Notifier::findHandlers
      */
     public function testSendMessageSuccess()
     {
@@ -57,42 +59,50 @@ class NotifierTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Notifier::sendMessage
+     * @covers Notifier\Notifier::sendMessage
+     * @covers Notifier\Notifier::findHandlers
      */
     public function testSendMessageFailure()
     {
-        $handler = new NullHandler(null);
-        $this->notifier->pushHandler($handler);
         $message = new Message('test');
         $this->assertFalse($this->notifier->sendMessage($message));
     }
 
-    public function testRecipientFilterSuccess()
+    /**
+     * @dataProvider filterProvider
+     */
+    public function testRecipientFilterSuccess($handlerType, $messageType, $recipientDeliveryType, $resultRegex)
     {
         $randString = uniqid('testString_');
-        $this->expectOutputRegex('/' . $randString . '/');
-        $handler = new VarDumpHandler('test');
+        $this->expectOutputRegex(sprintf($resultRegex, $randString));
+
+        $handler = new VarDumpHandler($handlerType);
         $this->notifier->pushHandler($handler);
-        $message = new Message('test');
-        $message->setContent($randString);
+
         $recipient = new Recipient('Me');
-        $recipient->addType('test', 'var_dump');
+        $recipient->addType('test', $recipientDeliveryType);
+
+        $message = new Message($messageType);
+        $message->setContent($randString);
         $message->addRecipient($recipient);
+
         $this->notifier->sendMessage($message);
     }
 
-    public function testRecipientFilterFailure()
+    /**
+     * Provides data for testRecipientFilterSuccess
+     */
+    public function filterProvider()
     {
-        $randString = uniqid('testString_');
-        $this->expectOutputRegex('/^$/');
-        $handler = new VarDumpHandler('test');
-        $this->notifier->pushHandler($handler);
-        $message = new Message('test');
-        $message->setContent($randString);
-        $recipient = new Recipient('Me');
-        $recipient->addType('test', 'var_dumps');
-        $message->addRecipient($recipient);
-        $this->notifier->sendMessage($message);
+        return array(
+            array('test', 'test', 'var_dump', '/%s/'),
+            array('test', 'test', 'unknown',  '/^$/'),
+            array('test', 'mail', 'var_dump', '/^$/'),
+            array('test', 'mail', 'unknown',  '/^$/'),
+            array(null,   'test', 'var_dump', '/^$/'),
+            array(null,   'test', 'unknown',  '/^$/'),
+            array(null,   'mail', 'var_dump', '/^$/'),
+            array(null,   'mail', 'unknown',  '/^$/'),
+        );
     }
-
 }

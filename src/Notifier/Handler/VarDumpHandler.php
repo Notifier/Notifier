@@ -13,12 +13,22 @@ namespace Notifier\Handler;
 use Notifier\Message\MessageInterface;
 use Notifier\Recipient\RecipientInterface;
 
+/**
+ * @author Dries De Peuter <dries@nousefreak.be>
+ */
 class VarDumpHandler extends AbstractHandler
 {
     protected $deliveryType = 'var_dump';
 
-    protected function send(MessageInterface $message, RecipientInterface $recipient)
+    protected function sendOne(MessageInterface $message, RecipientInterface $recipient)
     {
-        var_dump($message);
+        var_dump($message, 1);
+
+        return true;
+    }
+
+    protected function sendBulk(MessageInterface $message, array $recipients)
+    {
+        var_dump($message, count($recipients));
     }
 }

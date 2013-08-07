@@ -13,12 +13,15 @@ namespace Notifier\Handler;
 use Notifier\Message\MessageInterface;
 use Notifier\Recipient\RecipientInterface;
 
+/**
+ * @author Dries De Peuter <dries@nousefreak.be>
+ */
 class NullHandler extends AbstractHandler
 {
     protected $deliveryType = 'none';
 
-    protected function send(MessageInterface $message, RecipientInterface $recipient)
+    protected function sendOne(MessageInterface $message, RecipientInterface $recipient)
     {
-        return false === $this->bubble;
+        return true;
     }
 }

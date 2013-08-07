@@ -8,14 +8,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Notifier\Tests\Recipient;
+namespace Notifier\Recipient;
 
 use Notifier\Recipient\Recipient;
 
+/**
+ * @author Dries De Peuter <dries@nousefreak.be>
+ */
 class RecipientTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers Notifier\Recipient::__construct
+     * @covers Notifier\Recipient\Recipient::__construct
      */
     public function testName()
     {
@@ -25,8 +28,8 @@ class RecipientTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Notifier\Recipient::setInfo
-     * @covers Notifier\Recipient::getInfo
+     * @covers Notifier\Recipient\Recipient::setInfo
+     * @covers Notifier\Recipient\Recipient::getInfo
      */
     public function testInfo()
     {

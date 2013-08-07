@@ -12,6 +12,9 @@ namespace Notifier\Message;
 
 use Notifier\Recipient\RecipientInterface;
 
+/**
+ * @author Dries De Peuter <dries@nousefreak.be>
+ */
 interface MessageInterface
 {
     public function getType();
@@ -30,4 +33,9 @@ interface MessageInterface
      * @return string
      */
     public function getContent();
+
+    /**
+     * @return bool
+     */
+    public function sendBulk();
 }

@@ -12,6 +12,9 @@ namespace Notifier\Message;
 
 use Notifier\Recipient\RecipientInterface;
 
+/**
+ * @author Dries De Peuter <dries@nousefreak.be>
+ */
 class Message implements MessageInterface
 {
     /**
@@ -38,6 +41,11 @@ class Message implements MessageInterface
      * @var string
      */
     protected $content = '';
+
+    /**
+     * @var bool
+     */
+    protected $bulk = true;
 
     /**
      * @param string $type
@@ -114,6 +122,11 @@ class Message implements MessageInterface
     public function getContent()
     {
         return $this->content;
+    }
+
+    public function sendBulk()
+    {
+        return $this->bulk;
     }
 
 }

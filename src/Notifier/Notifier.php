@@ -10,25 +10,33 @@
 
 namespace Notifier;
 
+use Notifier\Handler\HandlerInterface;
+use Notifier\Handler\ProcessorInterface;
+use Notifier\Message\MessageInterface;
+
+/**
+ * @author Dries De Peuter <dries@nousefreak.be>
+ */
 class Notifier
 {
     const TYPE_ALL = 'Notifier.all';
 
     /**
-     * @var Handler\HandlerInterface[]
+     * @var HandlerInterface[]
      */
     protected $handlers = array();
 
+    /**
+     * @var ProcessorInterface[]
+     */
     protected $processors = array();
-
-    protected $errors = array();
 
     /**
      * Pushes a handler on to the stack.
      *
-     * @param Handler\HandlerInterface $handler
+     * @param HandlerInterface $handler
      */
-    public function pushHandler(Handler\HandlerInterface $handler)
+    public function pushHandler(HandlerInterface $handler)
     {
         array_unshift($this->handlers, $handler);
     }
@@ -36,7 +44,7 @@ class Notifier
     /**
      * Pops a handler from the stack.
      *
-     * @return Handler\HandlerInterface
+     * @return HandlerInterface
      * @throws \LogicException
      */
     public function popHandler()
@@ -51,17 +59,17 @@ class Notifier
     /**
      * Pushes a processor on to the stack.
      *
-     * @param callable $processor
+     * @param ProcessorInterface $processor
      */
-    public function pushProcessor($processor)
+    public function pushProcessor(ProcessorInterface $processor)
     {
         array_unshift($this->processors, $processor);
     }
 
     /**
-     * Pops a handler from the stack.
+     * Pops a processor from the stack.
      *
-     * @return Handler\HandlerInterface
+     * @return ProcessorInterface
      * @throws \LogicException
      */
     public function popProcessor()
@@ -76,66 +84,68 @@ class Notifier
     /**
      * Send the message.
      *
-     * @param Message\MessageInterface $message
+     * @param MessageInterface $message
      *
      * @return bool
      */
-    public function sendMessage(Message\MessageInterface $message)
+    public function sendMessage(MessageInterface $message)
     {
-        if (!$this->handlers) {
-            //$this->pushHandler(new StreamHandler('php://stderr', self::DEBUG));
-            // @todo add a default handler
-        }
-        // check if any handler will handle this message
-        $handlerKey = null;
-        foreach ($this->handlers as $key => $handler) {
-            if ($handler->isHandling($message)) {
-                $handlerKey = $key;
-                break;
-            }
-        }
-        // none found
-        if (null === $handlerKey) {
+        if (0 == count($handlers = $this->findHandlers($message))) {
             return false;
         }
-        // found at least one, process message and dispatch it
+
+        $message = $this->processMessage($message);
+        foreach ($handlers as $handler) {
+            $this->handleMessage($handler, $message);
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  MessageInterface   $message
+     * @return HandlerInterface[]
+     */
+    private function findHandlers(MessageInterface $message)
+    {
+        $handlers = array();
+
+        foreach ($this->handlers as $handler) {
+            if ($handler->isHandling($message)) {
+                $handlers[] = $handler;
+            }
+        }
+
+        return $handlers;
+    }
+
+    /**
+     * @param  MessageInterface $message
+     * @return MessageInterface
+     */
+    private function processMessage(MessageInterface $message)
+    {
         foreach ($this->processors as $processor) {
             $message = call_user_func($processor, $message);
         }
 
-        $bubble = false;
-        $this->errors = array();
-        while (isset($this->handlers[$handlerKey]) && $bubble === false) {
-            foreach ($message->getRecipients() as $recipient) {
-                if ($recipient->isHandling($message, $this->handlers[$handlerKey]->getDeliveryType())) {
-                    $bubble = $this->handlers[$handlerKey]->handle($message, $recipient);
-                    $this->errors += $this->handlers[$handlerKey]->getErrors();
-                }
+        return $message;
+    }
+
+    /**
+     * @param HandlerInterface $handler
+     * @param MessageInterface $message
+     */
+    private function handleMessage(HandlerInterface $handler, MessageInterface $message)
+    {
+        $handlerRecipients = array();
+
+        foreach ($message->getRecipients() as $recipient) {
+            if ($recipient->isAccepting($message, $handler->getDeliveryType())) {
+                $handlerRecipients[] = $recipient;
             }
-            $handlerKey++;
         }
 
-        return count($this->errors) == 0;
+        $handler->handle($message, $handlerRecipients);
     }
-
-    /**
-     * Return whether an error occurred.
-     *
-     * @return bool
-     */
-    public function isError()
-    {
-        return count($this->errors) > 0;
-    }
-
-    /**
-     * Get the list of errors.
-     *
-     * @return array
-     */
-    public function getErrors()
-    {
-        return $this->errors;
-    }
-
 }
