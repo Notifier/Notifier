@@ -47,6 +47,8 @@ class Message implements MessageInterface
      */
     protected $bulk = true;
 
+    protected $formatted = array();
+
     /**
      * @param string $type
      */
@@ -129,4 +131,25 @@ class Message implements MessageInterface
         return $this->bulk;
     }
 
+    /**
+     * @param $name
+     * @param $message
+     */
+    public function setFormatted($name, $message)
+    {
+        $this->formatted[$name] = $message;
+    }
+
+    /**
+     * @param $name
+     * @return array
+     */
+    public function getFormatted($name)
+    {
+        if (!isset($this->formatted[$name])) {
+            return false;
+        }
+
+        return $this->formatted[$name];
+    }
 }
