@@ -36,13 +36,22 @@ The project is still in development and is not yet suited for production environ
 
 ## Handlers
 
- - _MailHandler_: Send the message via mail.
- - _SwiftMailerHandler_: Send the message using [Swift Mailer](http://swiftmailer.org/).
- - _ProwlAppHandler_: Send the message to iOS using [Prowl](http://www.prowlapp.com/).
- - _PushoverHandler_: Send the message to iOS/android using [Pushover](http://pushover.net/).
- - _StompHandler_: Send the message using [STOMP](http://stomp.fusesource.org/).
- - _NullHandler_: Ignore the message completely.
- - _VarDumpHandler_: Send the output to the screen. (For debugging)
+Notifier is stripped of most handlers. You can find a [list of all available handler](http://github.com/Notifier).
+
+## Contributing
+
+> All code contributions - including those of people having commit access - must
+> go through a pull request and approved by a core developer before being
+> merged. This is to ensure proper review of all the code.
+>
+> Fork the project, create a feature branch, and send us a pull request.
+>
+> To ensure a consistent code base, you should make sure the code follows
+> the [Coding Standards](http://symfony.com/doc/2.0/contributing/code/standards.html)
+> which we borrowed from Symfony.
+> Make sure to check out [php-cs-fixer](https://github.com/fabpot/PHP-CS-Fixer) as this will help you a lot.
+
+If you would like to help take a look at the [list of issues](http://github.com/Notifier/Notifier/issues).
 
 ## License
 
