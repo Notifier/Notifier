@@ -53,6 +53,16 @@ Notifier is stripped of most handlers. You can find a [list of all available han
 
 If you would like to help take a look at the [list of issues](http://github.com/Notifier/Notifier/issues).
 
+## Requirements
+
+PHP 5.3.2 or above
+
+## Author and contributors
+
+Dries De Peuter - <dries@nousefreak.be> - <http://nousefreak.be>
+
+See also the list of [contributors](https://github.com/Notifier/Notifier/contributors) who participated in this project.
+
 ## License
 
 Notifier is licensed under the MIT license.
