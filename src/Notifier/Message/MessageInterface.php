@@ -38,4 +38,16 @@ interface MessageInterface
      * @return bool
      */
     public function sendBulk();
+
+    /**
+     * @param $name
+     * @param $message
+     */
+    public function setFormatted($name, $message);
+
+    /**
+     * @param $name
+     * @return mixed
+     */
+    public function getFormatted($name);
 }
