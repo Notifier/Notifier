@@ -33,7 +33,7 @@ class Recipient implements RecipientInterface
     /**
      * @param mixed $data
      */
-    public function __construct($data)
+    public function __construct($data = array())
     {
         $this->setData($data);
     }

@@ -13,6 +13,7 @@ namespace Notifier\Handler;
 use Notifier\Formatter\FormatterInterface;
 use Notifier\Message\MessageInterface;
 use Notifier\Recipient\RecipientInterface;
+use Notifier\Response\ResponseInterface;
 
 /**
  * @author Dries De Peuter <dries@nousefreak.be>
@@ -45,4 +46,6 @@ interface HandlerInterface
     public function getFormatter();
 
     public function getDeliveryType();
+
+    public function setResponse(ResponseInterface $response);
 }

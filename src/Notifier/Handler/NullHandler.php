@@ -22,6 +22,6 @@ class NullHandler extends AbstractHandler
 
     protected function sendOne(MessageInterface $message, RecipientInterface $recipient)
     {
-        return true;
+        $this->response->addSuccess();
     }
 }

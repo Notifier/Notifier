@@ -24,11 +24,13 @@ class VarDumpHandler extends AbstractHandler
     {
         var_dump($message, 1);
 
-        return true;
+        $this->response->addSuccess(1);
     }
 
     protected function sendBulk(MessageInterface $message, array $recipients)
     {
         var_dump($message, count($recipients));
+
+        $this->response->addSuccess(count($recipients));
     }
 }

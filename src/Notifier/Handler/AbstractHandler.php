@@ -15,6 +15,8 @@ use Notifier\Recipient\RecipientInterface;
 use Notifier\Formatter\FormatterInterface;
 use Notifier\Formatter\NullFormatter;
 use Notifier\Message\MessageInterface;
+use Notifier\Response\Response;
+use Notifier\Response\ResponseInterface;
 
 abstract class AbstractHandler implements HandlerInterface
 {
@@ -29,6 +31,11 @@ abstract class AbstractHandler implements HandlerInterface
      * @var bool
      */
     protected $bubble;
+
+    /**
+     * @var ResponseInterface
+     */
+    protected $response;
 
     /**
      * @var array|string
@@ -52,12 +59,10 @@ abstract class AbstractHandler implements HandlerInterface
 
     /**
      * @param string|array $types  The types this handler handles.
-     * @param Boolean      $bubble Whether the messages that are handled can bubble up the stack or not
      */
-    public function __construct($types = Notifier::TYPE_ALL, $bubble = true)
+    public function __construct($types = Notifier::TYPE_ALL)
     {
         $this->setTypes($types);
-        $this->bubble = $bubble;
     }
 
     public function setTypes($types)
@@ -119,7 +124,7 @@ abstract class AbstractHandler implements HandlerInterface
     final public function handle(MessageInterface $message, array $recipients)
     {
         if (!count($recipients)) {
-            return false;
+            return $this->getResponse();
         }
 
         $message = $this->getFormatter()->format($message);
@@ -132,7 +137,7 @@ abstract class AbstractHandler implements HandlerInterface
             }
         }
 
-        return false === $this->bubble;
+        return $this->getResponse();
     }
 
     /**
@@ -168,8 +173,9 @@ abstract class AbstractHandler implements HandlerInterface
     /**
      * Send to a single recipient.
      *
-     * @param MessageInterface   $message
+     * @param MessageInterface $message
      * @param RecipientInterface $recipient
+     * @return array
      */
     abstract protected function sendOne(MessageInterface $message, RecipientInterface $recipient);
 
@@ -184,5 +190,21 @@ abstract class AbstractHandler implements HandlerInterface
         foreach ($recipients as $recipient) {
             $this->sendOne($message, $recipient);
         }
+    }
+
+    /**
+     * @param ResponseInterface $response
+     */
+    public function setResponse(ResponseInterface $response)
+    {
+        $this->response = $response;
+    }
+
+    /**
+     * @return ResponseInterface
+     */
+    public function getResponse()
+    {
+        return $this->response;
     }
 }

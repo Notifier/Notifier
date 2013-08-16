@@ -10,9 +10,12 @@
 
 namespace Notifier;
 
+use Notifier\Exception\HandlerException;
 use Notifier\Handler\HandlerInterface;
-use Notifier\Handler\ProcessorInterface;
+use Notifier\Processor\ProcessorInterface;
 use Notifier\Message\MessageInterface;
+use Notifier\Response\Response;
+use Notifier\Response\ResponseInterface;
 
 /**
  * @author Dries De Peuter <dries@nousefreak.be>
@@ -86,20 +89,23 @@ class Notifier
      *
      * @param MessageInterface $message
      *
-     * @return bool
+     * @return ResponseInterface
      */
     public function sendMessage(MessageInterface $message)
     {
+        $response = new Response();
         if (0 == count($handlers = $this->findHandlers($message))) {
-            return false;
+            $response->addWarning(new HandlerException('No handler found.'));
+            return $response;
         }
 
         $message = $this->processMessage($message);
         foreach ($handlers as $handler) {
+            $handler->setResponse($response);
             $this->handleMessage($handler, $message);
         }
 
-        return true;
+        return $response;
     }
 
     /**
