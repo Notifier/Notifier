@@ -16,11 +16,13 @@ use Notifier\Handler\NullHandler;
 /**
  * @author Dries De Peuter <dries@nousefreak.be>
  */
-class HandlerTest extends \PHPUnit_Framework_TestCase
+class NullHandlerTest extends AbstractHandlerTest
 {
-    public function testFormatter()
+    /**
+     * @return HandlerInterface
+     */
+    protected function getHandler()
     {
-        $handler = new NullHandler();
-        $this->assertTrue($handler->getFormatter() instanceof FormatterInterface);
+        return new NullHandler();
     }
 }

@@ -55,7 +55,10 @@ class NotifierTest extends \PHPUnit_Framework_TestCase
         $handler = new NullHandler();
         $this->notifier->pushHandler($handler);
         $message = new Message('test');
-        $this->assertTrue($this->notifier->sendMessage($message));
+        $response = $this->notifier->sendMessage($message);
+
+        $this->assertFalse($response->hasErrors());
+        $this->assertEquals(0, $response->getSuccessCount());
     }
 
     /**
@@ -65,7 +68,11 @@ class NotifierTest extends \PHPUnit_Framework_TestCase
     public function testSendMessageFailure()
     {
         $message = new Message('test');
-        $this->assertFalse($this->notifier->sendMessage($message));
+        $response = $this->notifier->sendMessage($message);
+
+        $this->assertFalse($response->hasErrors());
+        $this->assertTrue($response->hasWarnings());
+        $this->assertEquals(0, $response->getSuccessCount());
     }
 
     /**
