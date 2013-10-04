@@ -25,6 +25,11 @@ class Message implements MessageInterface
     protected $recipients = array();
 
     /**
+     * @var array
+     */
+    protected $from = array();
+
+    /**
      * @var string
      */
     protected $subject = '';
@@ -66,6 +71,22 @@ class Message implements MessageInterface
     public function &getRecipients()
     {
         return $this->recipients;
+    }
+
+    /**
+     * @param array $from
+     */
+    public function setFrom($from)
+    {
+        $this->from = $from;
+    }
+
+    /**
+     * @return array
+     */
+    public function getFrom()
+    {
+        return $this->from;
     }
 
     /**

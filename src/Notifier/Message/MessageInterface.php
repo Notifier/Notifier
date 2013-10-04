@@ -22,6 +22,11 @@ interface MessageInterface
     public function &getRecipients();
 
     /**
+     * @return array
+     */
+    public function getFrom();
+
+    /**
      * @return string
      */
     public function getSubject();
