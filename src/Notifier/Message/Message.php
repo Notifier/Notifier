@@ -10,6 +10,7 @@
 
 namespace Notifier\Message;
 
+use Notifier\Contact\ContactInterface;
 use Notifier\Recipient\RecipientInterface;
 
 class Message implements MessageInterface
@@ -25,9 +26,9 @@ class Message implements MessageInterface
     protected $recipients = array();
 
     /**
-     * @var array
+     * @var ContactInterface[]
      */
-    protected $from = array();
+    protected $senders = array();
 
     /**
      * @var string
@@ -74,19 +75,19 @@ class Message implements MessageInterface
     }
 
     /**
-     * @param array $from
+     * @param array|ContactInterface $sender
      */
-    public function setFrom($from)
+    public function addSender($sender)
     {
-        $this->from = $from;
+        $this->senders[] = $sender;
     }
 
     /**
-     * @return array
+     * @return array|ContactInterface[]
      */
-    public function getFrom()
+    public function &getSenders()
     {
-        return $this->from;
+        return $this->senders;
     }
 
     /**
