@@ -10,6 +10,7 @@
 
 namespace Notifier\Message;
 
+use Notifier\Contact\ContactInterface;
 use Notifier\Recipient\RecipientInterface;
 
 interface MessageInterface
@@ -20,6 +21,11 @@ interface MessageInterface
      * @return RecipientInterface[]
      */
     public function &getRecipients();
+
+    /**
+     * @return ContactInterface[]
+     */
+    public function &getSenders();
 
     /**
      * @return string

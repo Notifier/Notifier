@@ -8,10 +8,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Notifier\Recipient;
+namespace Notifier\Sender;
 
 use Notifier\Contact\Contact;
 
-class Recipient extends Contact implements RecipientInterface
+class Sender extends Contact
 {
+
 }

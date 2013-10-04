@@ -10,6 +10,7 @@
 
 namespace Notifier\Handler;
 
+use Notifier\Formatter\FormatterInterface;
 use Notifier\Message\MessageInterface;
 use Notifier\Recipient\RecipientInterface;
 use Notifier\Formatter\SwiftMailerFormatter;
@@ -45,9 +46,15 @@ class SwiftMailerHandler extends MailHandler
     protected function send(MessageInterface $message, RecipientInterface $recipient)
     {
         $mail = clone $this->message;
+        if (count($message->getSenders()) > 0) {
+            foreach ($message->getSenders() as $sender) {
+                $mail->setFrom($sender->getData());
+            }
+        }
         $mail->setTo($recipient->getInfo('email'));
         $mail->setSubject($message->getSubject());
         $mail->setBody($message->getContent(), 'text/html');
+
         $this->mailer->send($mail);
     }
 

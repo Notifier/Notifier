@@ -10,17 +10,8 @@
 
 namespace Notifier\Recipient;
 
-use Notifier\Message\MessageInterface;
+use Notifier\Contact\ContactInterface;
 
-interface RecipientInterface
+interface RecipientInterface extends ContactInterface
 {
-    public function getData();
-
-    public function getTypes();
-
-    public function getInfo($key);
-
-    public function setInfo($key, $value);
-
-    public function isHandling(MessageInterface $message, $deliveryType);
 }
