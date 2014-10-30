@@ -2,7 +2,9 @@ Notifier
 ========
 
 [![Build Status](https://travis-ci.org/Notifier/Notifier.svg?branch=master)](https://travis-ci.org/Notifier/Notifier)
-[![Latest Stable Version](https://poser.pugx.org/notifier/notifier/v/stable.svg)](https://packagist.org/packages/notifier/notifier) [![Total Downloads](https://poser.pugx.org/notifier/notifier/downloads.svg)](https://packagist.org/packages/notifier/notifier) [![Latest Unstable Version](https://poser.pugx.org/notifier/notifier/v/unstable.svg)](https://packagist.org/packages/notifier/notifier) [![License](https://poser.pugx.org/notifier/notifier/license.svg)](https://packagist.org/packages/notifier/notifier)
+[![Latest Stable Version](https://poser.pugx.org/notifier/notifier/v/stable.svg)](https://packagist.org/packages/notifier/notifier) [![Total Downloads](https://poser.pugx.org/notifier/notifier/downloads.svg)](https://packagist.org/packages/notifier/notifier) [![Latest Unstable Version](https://poser.pugx.org/notifier/notifier/v/unstable.svg)](https://packagist.org/packages/notifier/notifier)
+[![Dependency Status](https://www.versioneye.com/user/projects/5452c08f22b4fb8a71000025/badge.svg)](https://www.versioneye.com/user/projects/5452c08f22b4fb8a71000025)
+[![License](https://poser.pugx.org/notifier/notifier/license.svg)](https://packagist.org/packages/notifier/notifier)
 
 Notifier acts as a notification center.
 
