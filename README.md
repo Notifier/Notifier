@@ -11,32 +11,16 @@ Recipients will only receive the messages they signed up for.
 ```php
 <?php
 
-$notifier = new Notifier\Notifier();
-$notifier->pushProcessor(function($message) {
-    $recipients = $message->getRecipients();
-    // only set the filters just before sending.
-    foreach ($recipients as &$recipient) {
-        if ($recipient->getData() == 'Dries') {
-            $recipient->addType('test', 'var_dump');
-        }
-    }
-    return $message;
-});
-$notifier->pushHandler(new Notifier\Handler\VarDumpHandler(array('test', 'mailing')));
-
-$message = new Notifier\Message\Message('test');
-$message->addRecipient(new Notifier\Recipient\Recipient('Dries'));
-
-$notifier->sendMessage($message);
+//TODO
 ```
 
 ## Current state
 
-The project is still in development and is not yet suited for production environments.
+The project is in active development of 2.0.x. Please refer to [1.0.x](https://github.com/Notifier/Notifier/blob/1.0.x/README.md) if you want to use this in production.
 
-## Handlers
+## Channels
 
-Notifier is stripped of most handlers. You can find a [list of all available handler](http://github.com/Notifier).
+Notifier is stripped of most channels. You can find a [list of all available channels](http://github.com/Notifier).
 
 ## Contributing
 

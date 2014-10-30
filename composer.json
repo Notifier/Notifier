@@ -1,31 +1,29 @@
 {
     "name": "notifier/notifier",
-    "type": "library",
-    "description": "Notifier, direct notifications.",
-    "keywords": ["notification", "messages"],
-    "homepage": "https://github.com/nousefreak/Notifier",
+    "description": "Send notifications using any delivery method.",
     "license": "MIT",
     "authors": [
         {
             "name": "Dries De Peuter",
-            "email": "dries@nousefreak.be",
-            "homepage": "http://nousefreak.be"
+            "email": "dries@nousefreak.be"
         }
     ],
+    "autoload": {
+        "psr-4" : {
+            "Notifier\\" : "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": { "Notifier\\Tests\\": "tests/" }
+    },
+    "minimum-stability": "stable",
     "require": {
         "php": ">=5.3.3"
     },
-    "require-dev": {
-        "phpunit/phpunit": "3.7.*@dev"
-    },
-    "autoload": {
-        "psr-0" : {
-            "Notifier" : "src/"
-        }
-    },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-1.0.x": "1.0-dev",
+            "dev-master": "2.0.x-dev"
         }
     }
 }
