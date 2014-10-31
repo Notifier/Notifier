@@ -10,6 +10,7 @@
 namespace Notifier\Channel;
 
 use Notifier\Message\MessageInterface;
+use Notifier\Processor\ProcessorInterface;
 use Notifier\Recipient\RecipientInterface;
 
 /**
@@ -18,15 +19,27 @@ use Notifier\Recipient\RecipientInterface;
 interface ChannelInterface
 {
     /**
+     * Test if the channel can send the message given the supplied parameters.
+     *
      * @param  MessageInterface $message
+     * @param  RecipientInterface $recipient
      * @return bool
      */
-    public function isHandling(MessageInterface $message);
+    public function isHandling(MessageInterface $message, RecipientInterface $recipient);
 
     /**
+     * Send the message.
+     *
      * @param  MessageInterface   $message
      * @param  RecipientInterface $recipient
      * @return bool
      */
     public function send(MessageInterface $message, RecipientInterface $recipient);
+
+    /**
+     * Get processors required by this channel.
+     *
+     * @return ProcessorInterface|null
+     */
+    public function getProcessor();
 }

@@ -105,6 +105,11 @@ class Notifier
     {
         $this->getChannelStore()
             ->addChannel($channel);
+
+        $processor = $channel->getProcessor();
+        if ($processor) {
+            $this->getProcessorStore()->addProcessor($processor);
+        }
     }
 
     /**
@@ -149,7 +154,7 @@ class Notifier
             foreach ($this->getChannels($message, $recipient) as $channel) {
                 $processedMessage = $messageProcessor
                     ->processMessage(clone($message), $recipient);
-                if ($channel->isHandling($processedMessage)) {
+                if ($channel->isHandling($processedMessage, $recipient)) {
                     $channel->send($processedMessage, $recipient);
                 }
             }
@@ -166,7 +171,7 @@ class Notifier
     private function getChannels(MessageInterface $message, RecipientInterface $recipient)
     {
         $channels = $this->typeBLL
-            ->getChannels($message->getType());
+            ->getChannels($message->getType(), $this->getChannelStore());
 
         return $this->recipientBLL
             ->filterChannels($recipient, $message->getType(), $channels);

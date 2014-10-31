@@ -9,6 +9,7 @@
 
 namespace Notifier\Type;
 use Notifier\Channel\ChannelInterface;
+use Notifier\Channel\ChannelStore;
 
 /**
  * @author Dries De Peuter <dries@nousefreak.be>
@@ -19,7 +20,8 @@ interface TypeResolverInterface
      * Get all channels for a given type of message.
      *
      * @param  TypeInterface      $type
+     * @param  ChannelStore $channelStore
      * @return ChannelInterface[]
      */
-    public function getChannels(TypeInterface $type);
+    public function getChannels(TypeInterface $type, ChannelStore $channelStore);
 }
