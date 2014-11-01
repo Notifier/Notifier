@@ -11,6 +11,7 @@ namespace Notifier\Tests\Stubs;
 
 use Notifier\Channel\ChannelInterface;
 use Notifier\Message\MessageInterface;
+use Notifier\Processor\ProcessorInterface;
 use Notifier\Recipient\RecipientInterface;
 
 /**
@@ -24,10 +25,11 @@ class Channel implements ChannelInterface
     public $messages = array();
 
     /**
-     * @param  MessageInterface $message
+     * @param  MessageInterface   $message
+     * @param  RecipientInterface $recipient
      * @return bool
      */
-    public function isHandling(MessageInterface $message)
+    public function isHandling(MessageInterface $message, RecipientInterface $recipient)
     {
         return true;
     }
@@ -40,5 +42,15 @@ class Channel implements ChannelInterface
     public function send(MessageInterface $message, RecipientInterface $recipient)
     {
         $this->messages[] = $message;
+    }
+
+    /**
+     * Get processors required by this channel.
+     *
+     * @return ProcessorInterface|null
+     */
+    public function getProcessor()
+    {
+        return array();
     }
 }
