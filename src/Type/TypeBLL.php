@@ -18,7 +18,7 @@ class TypeBLL implements TypeResolverInterface
 {
     /**
      * @param  TypeInterface      $type
-     * @param ChannelStore $channelStore
+     * @param  ChannelStore       $channelStore
      * @return ChannelInterface[]
      */
     public function getChannels(TypeInterface $type, ChannelStore $channelStore)

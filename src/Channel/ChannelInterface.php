@@ -21,7 +21,7 @@ interface ChannelInterface
     /**
      * Test if the channel can send the message given the supplied parameters.
      *
-     * @param  MessageInterface $message
+     * @param  MessageInterface   $message
      * @param  RecipientInterface $recipient
      * @return bool
      */

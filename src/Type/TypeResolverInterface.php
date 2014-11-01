@@ -20,7 +20,7 @@ interface TypeResolverInterface
      * Get all channels for a given type of message.
      *
      * @param  TypeInterface      $type
-     * @param  ChannelStore $channelStore
+     * @param  ChannelStore       $channelStore
      * @return ChannelInterface[]
      */
     public function getChannels(TypeInterface $type, ChannelStore $channelStore);
