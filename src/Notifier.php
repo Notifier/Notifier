@@ -17,7 +17,7 @@ use Notifier\Processor\ProcessorInterface;
 use Notifier\Processor\ProcessorStore;
 use Notifier\Recipient\RecipientBLL;
 use Notifier\Recipient\RecipientInterface;
-use Notifier\Type\TypeBLL;
+use Notifier\Type\TypeResolverInterface;
 
 /**
  * @author Dries De Peuter <dries@nousefreak.be>
@@ -40,7 +40,7 @@ class Notifier
     private $recipientBLL;
 
     /**
-     * @var TypeBLL
+     * @var TypeResolverInterface
      */
     private $typeBLL;
 
@@ -49,10 +49,10 @@ class Notifier
      *
      * @api
      *
-     * @param RecipientBLL $recipientBLL
-     * @param TypeBLL      $typeBLL
+     * @param RecipientBLL          $recipientBLL
+     * @param TypeResolverInterface $typeBLL
      */
-    public function __construct(RecipientBLL $recipientBLL, TypeBLL $typeBLL)
+    public function __construct(RecipientBLL $recipientBLL, TypeResolverInterface $typeBLL)
     {
         $this->recipientBLL = $recipientBLL;
         $this->typeBLL = $typeBLL;
