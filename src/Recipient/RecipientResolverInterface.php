@@ -7,22 +7,20 @@
  * file that was distributed with this source code.
  */
 
-namespace Notifier\Type;
+namespace Notifier\Recipient;
 use Notifier\Channel\ChannelInterface;
-use Notifier\Channel\ChannelStore;
+use Notifier\Type\TypeInterface;
 
 /**
  * @author Dries De Peuter <dries@nousefreak.be>
  */
-class TypeBLL implements TypeResolverInterface
+interface RecipientResolverInterface
 {
     /**
+     * @param  RecipientInterface $recipient
      * @param  TypeInterface      $type
-     * @param  ChannelStore       $channelStore
+     * @param  ChannelInterface[] $channels
      * @return ChannelInterface[]
      */
-    public function getChannels(TypeInterface $type, ChannelStore $channelStore)
-    {
-        return array();
-    }
+    public function filterChannels(RecipientInterface $recipient, TypeInterface $type, array $channels);
 }

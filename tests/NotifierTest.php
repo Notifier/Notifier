@@ -12,16 +12,15 @@ namespace Notifier\Tests;
 use Notifier\Channel\ChannelStore;
 use Notifier\Notifier;
 use Notifier\Processor\ProcessorStore;
-use Notifier\Recipient\RecipientBLL;
 use Notifier\Tests\Stubs\Channel;
+use Notifier\Tests\Stubs\ChannelResolver;
 use Notifier\Tests\Stubs\Processor;
-use Notifier\Type\TypeBLL;
 
 class NotifierTest extends \PHPUnit_Framework_TestCase
 {
     public function testEmptyConstructor()
     {
-        $notifier = new Notifier(new RecipientBLL(), new TypeBLL());
+        $notifier = new Notifier(new ChannelResolver());
 
         $this->assertInstanceOf('\Notifier\Channel\ChannelStore', $notifier->getChannelStore());
         $this->assertInstanceOf('\Notifier\Processor\ProcessorStore', $notifier->getProcessorStore());
@@ -30,16 +29,17 @@ class NotifierTest extends \PHPUnit_Framework_TestCase
     public function testChannelConstructor()
     {
         $channelStore = new ChannelStore();
-        $notifier = new Notifier(new RecipientBLL(), new TypeBLL(), $channelStore);
+        $notifier = new Notifier(new ChannelResolver());
+        $notifier->setChannelStore($channelStore);
 
         $this->assertInstanceOf('\Notifier\Channel\ChannelStore', $notifier->getChannelStore());
-        $this->assertEquals($channelStore, $notifier->getChannelStore());
+        $this->assertSame($channelStore, $notifier->getChannelStore());
     }
 
     public function testAddChannel()
     {
         $channel = new Channel();
-        $notifier = new Notifier(new RecipientBLL(), new TypeBLL());
+        $notifier = new Notifier(new ChannelResolver());
 
         $notifier->addChannel($channel);
 
@@ -49,16 +49,17 @@ class NotifierTest extends \PHPUnit_Framework_TestCase
     public function testProcessorConstructor()
     {
         $processorStore = new ProcessorStore();
-        $notifier = new Notifier(new RecipientBLL(), new TypeBLL(), null, $processorStore);
+        $notifier = new Notifier(new ChannelResolver());
+        $notifier->setProcessorStore($processorStore);
 
         $this->assertInstanceOf('\Notifier\Processor\ProcessorStore', $notifier->getProcessorStore());
-        $this->assertEquals($processorStore, $notifier->getProcessorStore());
+        $this->assertSame($processorStore, $notifier->getProcessorStore());
     }
 
     public function testAddProcessor()
     {
         $processor = new Processor();
-        $notifier = new Notifier(new RecipientBLL(), new TypeBLL());
+        $notifier = new Notifier(new ChannelResolver());
 
         $notifier->addProcessor($processor);
 

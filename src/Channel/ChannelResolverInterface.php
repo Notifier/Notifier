@@ -7,14 +7,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Notifier\Recipient;
-use Notifier\Channel\ChannelInterface;
+namespace Notifier\Channel;
+
+use Notifier\Recipient\RecipientInterface;
 use Notifier\Type\TypeInterface;
 
 /**
  * @author Dries De Peuter <dries@nousefreak.be>
  */
-class RecipientBLL
+interface ChannelResolverInterface
 {
     /**
      * @param  RecipientInterface $recipient
@@ -22,8 +23,14 @@ class RecipientBLL
      * @param  ChannelInterface[] $channels
      * @return ChannelInterface[]
      */
-    public function filterChannels(RecipientInterface $recipient, TypeInterface $type, array $channels)
-    {
-        return $channels;
-    }
+    public function filterChannels(RecipientInterface $recipient, TypeInterface $type, array $channels);
+
+    /**
+     * Get all channels for a given type of message.
+     *
+     * @param  TypeInterface      $type
+     * @param  ChannelStore       $channelStore
+     * @return ChannelInterface[]
+     */
+    public function getChannels(TypeInterface $type, ChannelStore $channelStore);
 }

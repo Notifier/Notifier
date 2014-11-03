@@ -12,16 +12,14 @@ namespace Notifier\Tests;
 use Notifier\Message\Message;
 use Notifier\Notifier;
 use Notifier\Recipient\Recipient;
-use Notifier\Recipient\RecipientBLL;
-use Notifier\Type\TypeBLL;
+use Notifier\Tests\Stubs\ChannelResolver;
 
 class ExampleTest extends \PHPUnit_Framework_TestCase
 {
     public function testExample()
     {
-        $recipientBLL = new RecipientBLL();
-        $typeBLL = new TypeBLL();
-        $notifier = new Notifier($recipientBLL, $typeBLL);
+        $channelResolver = new ChannelResolver();
+        $notifier = new Notifier($channelResolver);
 
         $message = new Message(new Stubs\Type());
         $notifier->sendMessage($message, array(new Recipient()));

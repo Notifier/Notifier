@@ -12,11 +12,30 @@ Recipients will only receive the messages they signed up for.
 
 **Caution**: Only use **< 2.0** in production!
 
+## Use Case
+
+Say you want your users to choose how they receive notifications from your application. 
+For example on a new private message you have them choose SMS, email or both. Notifier will help you handle these choices.
+From within your application you don't need to worry about what delivery type the user chose. 
+You just send the message indicating what type the message is and Notifier will resolve the correct channels and send it.
+
 ## Usage
 ```php
 <?php
 
-//TODO
+use Notifier\Message\Message;
+use Notifier\Notifier;
+use Notifier\Recipient\Recipient;
+
+// Your implementation of the ChannelResolverInterface.
+// This will help decide 
+$channelResolver = new ChannelResolver();
+$notifier = new Notifier($channelResolver);
+
+// ...
+
+$message = new Message(new AlertType());
+$notifier->sendMessage($message, array(new Recipient()));
 ```
 
 ## Current state

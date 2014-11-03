@@ -10,14 +10,13 @@
 namespace Notifier;
 
 use Notifier\Channel\ChannelInterface;
+use Notifier\Channel\ChannelResolverInterface;
 use Notifier\Channel\ChannelStore;
 use Notifier\Message\MessageInterface;
 use Notifier\Message\MessageProcessor;
 use Notifier\Processor\ProcessorInterface;
 use Notifier\Processor\ProcessorStore;
-use Notifier\Recipient\RecipientBLL;
 use Notifier\Recipient\RecipientInterface;
-use Notifier\Type\TypeResolverInterface;
 
 /**
  * @author Dries De Peuter <dries@nousefreak.be>
@@ -35,27 +34,20 @@ class Notifier
     private $processorStore;
 
     /**
-     * @var RecipientBLL
+     * @var ChannelResolverInterface
      */
-    private $recipientBLL;
-
-    /**
-     * @var TypeResolverInterface
-     */
-    private $typeBLL;
+    private $channelResolver;
 
     /**
      * Construct Notifier with your own logic.
      *
      * @api
      *
-     * @param RecipientBLL          $recipientBLL
-     * @param TypeResolverInterface $typeBLL
+     * @param ChannelResolverInterface $channelResolver
      */
-    public function __construct(RecipientBLL $recipientBLL, TypeResolverInterface $typeBLL)
+    public function __construct(ChannelResolverInterface $channelResolver)
     {
-        $this->recipientBLL = $recipientBLL;
-        $this->typeBLL = $typeBLL;
+        $this->channelResolver = $channelResolver;
     }
 
     /**
@@ -170,10 +162,10 @@ class Notifier
      */
     private function getChannels(MessageInterface $message, RecipientInterface $recipient)
     {
-        $channels = $this->typeBLL
+        $channels = $this->channelResolver
             ->getChannels($message->getType(), $this->getChannelStore());
 
-        return $this->recipientBLL
+        return $this->channelResolver
             ->filterChannels($recipient, $message->getType(), $channels);
     }
 }
