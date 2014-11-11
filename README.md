@@ -6,9 +6,7 @@ Notifier
 [![Dependency Status](https://www.versioneye.com/user/projects/5452c08f22b4fb8a71000025/badge.svg)](https://www.versioneye.com/user/projects/5452c08f22b4fb8a71000025)
 [![License](https://poser.pugx.org/notifier/notifier/license.svg)](https://packagist.org/packages/notifier/notifier)
 
-Notifier acts as a notification center.
-
-Recipients will only receive the messages they signed up for.
+Using this library, you can send messages to users following their preffered channels. This will help you focus on your application code and leave the message sending to your Notifier implementation.
 
 **Caution**: Only use **< 2.0** in production!
 
