@@ -11,7 +11,6 @@ namespace Notifier\Tests\Stubs;
 
 use Notifier\Channel\ChannelInterface;
 use Notifier\Message\MessageInterface;
-use Notifier\Processor\ProcessorInterface;
 use Notifier\Recipient\RecipientInterface;
 
 /**
@@ -23,6 +22,14 @@ class Channel implements ChannelInterface
      * @var MessageInterface[]
      */
     public $messages = array();
+
+    /**
+     * @return string
+     */
+    public static function getChannelName()
+    {
+        return 'stubChannel';
+    }
 
     /**
      * @param  MessageInterface   $message
@@ -42,15 +49,5 @@ class Channel implements ChannelInterface
     public function send(MessageInterface $message, RecipientInterface $recipient)
     {
         $this->messages[] = $message;
-    }
-
-    /**
-     * Get processors required by this channel.
-     *
-     * @return ProcessorInterface|null
-     */
-    public function getProcessor()
-    {
-        return array();
     }
 }

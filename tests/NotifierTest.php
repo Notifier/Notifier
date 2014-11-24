@@ -10,11 +10,16 @@
 namespace Notifier\Tests;
 
 use Notifier\Channel\ChannelStore;
+use Notifier\Message\Message;
 use Notifier\Notifier;
 use Notifier\Processor\ProcessorStore;
+use Notifier\Recipient\Recipient;
 use Notifier\Tests\Stubs\Channel;
 use Notifier\Tests\Stubs\ChannelResolver;
+use Notifier\Tests\Stubs\FormattedMessage;
 use Notifier\Tests\Stubs\Processor;
+use Notifier\Tests\Stubs\StubMessage;
+use Notifier\Tests\Stubs\Type;
 
 class NotifierTest extends \PHPUnit_Framework_TestCase
 {
@@ -64,5 +69,48 @@ class NotifierTest extends \PHPUnit_Framework_TestCase
         $notifier->addProcessor($processor);
 
         $this->assertEquals(array($processor), $notifier->getProcessorStore()->getProcessors());
+    }
+
+    public function testDontSend()
+    {
+        $notifier = new Notifier(new ChannelResolver());
+
+        $channel = $this->getMock('\Notifier\Tests\Stubs\Channel', array('isHandling', 'send'));
+
+        $channel
+            ->expects($this->once())
+            ->method('isHandling')
+            ->withAnyParameters()
+        ;
+
+        $channel
+            ->expects($this->never())
+            ->method('send')
+            ->withAnyParameters()
+        ;
+
+        $notifier->addChannel($channel);
+
+        $notifier->sendMessage(new Message(new Type()), array(new Recipient()));
+    }
+
+    public function testSend()
+    {
+        $notifier = new Notifier(new ChannelResolver());
+
+        $channel = $this->getMock('\Notifier\Tests\Stubs\Channel', array('send'));
+
+        $channel
+            ->expects($this->once())
+            ->method('send')
+            ->withAnyParameters()
+        ;
+
+        $notifier->addChannel($channel);
+
+        $message = new Message(new Type());
+        $message->setFormattedMessage(new FormattedMessage($channel->getChannelName()));
+
+        $notifier->sendMessage($message, array(new Recipient()));
     }
 }

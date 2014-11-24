@@ -21,11 +21,17 @@ class Message implements MessageInterface
     private $type;
 
     /**
+     * @var FormattedMessageInterface[]
+     */
+    private $formattedMessages;
+
+    /**
      * @param TypeInterface $type
      */
     public function __construct(TypeInterface $type)
     {
         $this->setType($type);
+        $this->formattedMessages = array();
     }
 
     /**
@@ -42,5 +48,26 @@ class Message implements MessageInterface
     public function getType()
     {
         return $this->type;
+    }
+
+    /**
+     * @param FormattedMessageInterface $message
+     */
+    public function setFormattedMessage(FormattedMessageInterface $message)
+    {
+        $this->formattedMessages[$message->getChannelName()] = $message;
+    }
+
+    /**
+     * @param string $channelName
+     * @return FormattedMessageInterface
+     */
+    public function getFormattedMessage($channelName)
+    {
+        if (isset($this->formattedMessages[$channelName])) {
+            return $this->formattedMessages[$channelName];
+        }
+
+        return null;
     }
 }

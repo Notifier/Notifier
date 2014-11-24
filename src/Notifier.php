@@ -97,11 +97,6 @@ class Notifier
     {
         $this->getChannelStore()
             ->addChannel($channel);
-
-        $processor = $channel->getProcessor();
-        if ($processor) {
-            $this->getProcessorStore()->addProcessor($processor);
-        }
     }
 
     /**

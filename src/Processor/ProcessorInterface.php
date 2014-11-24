@@ -8,6 +8,7 @@
  */
 
 namespace Notifier\Processor;
+
 use Notifier\Message\MessageInterface;
 use Notifier\Recipient\RecipientInterface;
 

@@ -19,6 +19,11 @@ use Notifier\Recipient\RecipientInterface;
 interface ChannelInterface
 {
     /**
+     * @return string
+     */
+    public static function getChannelName();
+
+    /**
      * Test if the channel can send the message given the supplied parameters.
      *
      * @param  MessageInterface   $message
@@ -35,11 +40,4 @@ interface ChannelInterface
      * @return bool
      */
     public function send(MessageInterface $message, RecipientInterface $recipient);
-
-    /**
-     * Get processors required by this channel.
-     *
-     * @return ProcessorInterface|null
-     */
-    public function getProcessor();
 }

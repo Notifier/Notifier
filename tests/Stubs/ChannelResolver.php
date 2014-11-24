@@ -27,7 +27,7 @@ class ChannelResolver implements ChannelResolverInterface
      */
     public function getChannels(TypeInterface $type, ChannelStore $channelStore)
     {
-        return array();
+        return $channelStore->getChannels();
     }
 
     /**

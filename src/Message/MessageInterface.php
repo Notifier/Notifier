@@ -25,4 +25,15 @@ interface MessageInterface
      * @return TypeInterface
      */
     public function getType();
+
+    /**
+     * @param FormattedMessageInterface $message
+     */
+    public function setFormattedMessage(FormattedMessageInterface $message);
+
+    /**
+     * @param string $channelName
+     * @return FormattedMessageInterface
+     */
+    public function getFormattedMessage($channelName);
 }
