@@ -22,6 +22,6 @@ class ExampleTest extends \PHPUnit_Framework_TestCase
         $notifier = new Notifier($channelResolver);
 
         $message = new Message(new Stubs\Type());
-        $notifier->sendMessage($message, array(new Recipient()));
+        $notifier->sendMessage($message, array(new Recipient(1)));
     }
 }

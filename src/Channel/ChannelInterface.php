@@ -10,7 +10,6 @@
 namespace Notifier\Channel;
 
 use Notifier\Message\MessageInterface;
-use Notifier\Processor\ProcessorInterface;
 use Notifier\Recipient\RecipientInterface;
 
 /**

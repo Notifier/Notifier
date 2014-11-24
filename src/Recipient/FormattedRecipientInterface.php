@@ -12,17 +12,10 @@ namespace Notifier\Recipient;
 /**
  * @author Dries De Peuter <dries@nousefreak.be>
  */
-interface RecipientInterface
+interface FormattedRecipientInterface
 {
     /**
-     * @param FormattedRecipientInterface $formattedRecipient
+     * @return string
      */
-    public function addFormattedRecipient(FormattedRecipientInterface $formattedRecipient);
-
-    /**
-     * @param string $channelName
-     *
-     * @return FormattedRecipientInterface
-     */
-    public function getFormattedRecipient($channelName);
+    public function getChannelName();
 }

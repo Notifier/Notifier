@@ -24,7 +24,7 @@ class MessageProcessorTest extends \PHPUnit_Framework_TestCase
 
     private function buildRecipient()
     {
-        return new Recipient();
+        return new Recipient(1);
     }
 
     private function buildStore($processors)
@@ -41,8 +41,7 @@ class MessageProcessorTest extends \PHPUnit_Framework_TestCase
         $processor
             ->expects($this->once())
             ->method('preProcessMessage')
-            ->with($this->equalTo($message))
-        ;
+            ->with($this->equalTo($message));
 
         $store = $this->buildStore(array($processor));
 
@@ -59,8 +58,7 @@ class MessageProcessorTest extends \PHPUnit_Framework_TestCase
         $processor
             ->expects($this->once())
             ->method('processMessage')
-            ->with($this->equalTo($message), $this->equalTo($recipient))
-        ;
+            ->with($this->equalTo($message), $this->equalTo($recipient));
 
         $store = $this->buildStore(array($processor));
 

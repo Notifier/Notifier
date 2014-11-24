@@ -18,7 +18,6 @@ use Notifier\Tests\Stubs\Channel;
 use Notifier\Tests\Stubs\ChannelResolver;
 use Notifier\Tests\Stubs\FormattedMessage;
 use Notifier\Tests\Stubs\Processor;
-use Notifier\Tests\Stubs\StubMessage;
 use Notifier\Tests\Stubs\Type;
 
 class NotifierTest extends \PHPUnit_Framework_TestCase
@@ -80,18 +79,16 @@ class NotifierTest extends \PHPUnit_Framework_TestCase
         $channel
             ->expects($this->once())
             ->method('isHandling')
-            ->withAnyParameters()
-        ;
+            ->withAnyParameters();
 
         $channel
             ->expects($this->never())
             ->method('send')
-            ->withAnyParameters()
-        ;
+            ->withAnyParameters();
 
         $notifier->addChannel($channel);
 
-        $notifier->sendMessage(new Message(new Type()), array(new Recipient()));
+        $notifier->sendMessage(new Message(new Type()), array(new Recipient(1)));
     }
 
     public function testSend()
@@ -103,14 +100,13 @@ class NotifierTest extends \PHPUnit_Framework_TestCase
         $channel
             ->expects($this->once())
             ->method('send')
-            ->withAnyParameters()
-        ;
+            ->withAnyParameters();
 
         $notifier->addChannel($channel);
 
         $message = new Message(new Type());
         $message->setFormattedMessage(new FormattedMessage($channel->getChannelName()));
 
-        $notifier->sendMessage($message, array(new Recipient()));
+        $notifier->sendMessage($message, array(new Recipient(1)));
     }
 }

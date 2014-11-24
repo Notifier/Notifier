@@ -32,7 +32,7 @@ interface MessageInterface
     public function setFormattedMessage(FormattedMessageInterface $message);
 
     /**
-     * @param string $channelName
+     * @param  string                    $channelName
      * @return FormattedMessageInterface
      */
     public function getFormattedMessage($channelName);
