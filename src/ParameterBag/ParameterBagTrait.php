@@ -7,37 +7,27 @@
  * file that was distributed with this source code.
  */
 
-namespace Notifier\Message;
-
-use Notifier\ParameterBag\ParameterBagInterface;
-use Notifier\Type\TypeInterface;
+namespace Notifier\ParameterBag;
 
 /**
- * @author Dries De Peuter <dries@nousefreak.be>
- * @contributor Joeri van Dooren
+ * @author Joeri van Dooren
  */
-interface MessageInterface
+trait ParameterBagTrait
 {
     /**
-     * Set the message type.
-     *
-     * @param TypeInterface $type
+     * @var ParameterBagInterface[]
      */
-    public function setType(TypeInterface $type);
-
-    /**
-     * Get the message type.
-     *
-     * @return TypeInterface
-     */
-    public function getType();
+    private $parameterBags = array();
 
     /**
      * Get all the attached ParameterBags.
      *
      * @return ParameterBagInterface[]
      */
-    public function getParameterBags();
+    public function getParameterBags()
+    {
+        return $this->parameterBags;
+    }
 
     /**
      * Get a specific ParameterBag based on identifier.
@@ -45,7 +35,14 @@ interface MessageInterface
      * @param string $identifier
      * @return ParameterBagInterface
      */
-    public function getParameterBag($identifier);
+    public function getParameterBag($identifier)
+    {
+        if (isset($this->parameterBags[$identifier])) {
+            return $this->parameterBags[$identifier];
+        }
+
+        return null;
+    }
 
     /**
      * Check if this message has a specific ParameterBag.
@@ -53,12 +50,18 @@ interface MessageInterface
      * @param string $identifier
      * @return bool
      */
-    public function hasParameterBag($identifier);
+    public function hasParameterBag($identifier)
+    {
+        return isset($this->parameterBags[$identifier]);
+    }
 
     /**
      * Add a ParameterBag.
      *
      * @param ParameterBagInterface $bag
      */
-    public function addParameterBag(ParameterBagInterface $bag);
+    public function addParameterBag(ParameterBagInterface $bag)
+    {
+        $this->parameterBags[$bag->getIdentifier()] = $bag;
+    }
 }

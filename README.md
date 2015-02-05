@@ -17,23 +17,26 @@ For example on a new private message you have them choose SMS, email or both. No
 From within your application you don't need to worry about what delivery type the user chose. 
 You just send the message indicating what type the message is and Notifier will resolve the correct channels and send it.
 
-## Usage
-```php
-<?php
+## Example
 
+This is an example of the implementation of the MailChannel.
+
+```php
+use Notifier\Mail\ParameterBag\MailMessageParameterBag;
+use Notifier\Mail\ParameterBag\MailRecipientParameterBag;
+use Notifier\Recipient\Recipient;
 use Notifier\Message\Message;
 use Notifier\Notifier;
-use Notifier\Recipient\Recipient;
 
-// Your implementation of the ChannelResolverInterface.
-// This will help decide 
-$channelResolver = new ChannelResolver();
-$notifier = new Notifier($channelResolver);
+$message = new Message(new InformationType());
+$message->addParameterBag(new MailMessageParameterBag('Mail subject', 'Body...'));
 
-// ...
+$recipient = new Recipient();
+$recipient->addParameterBag(new MailRecipientParameterBag('someone@example.com'));
 
-$message = new Message(new AlertType());
-$notifier->sendMessage($message, array(new Recipient()));
+// The ChannelResolver will decide to which channels a message of a specific type must be sent.
+$notifier = new Notifier(new RecoverPasswordChannelResolver());
+$notifier->sendMessage($message, array($recipient));
 ```
 
 ## Current state

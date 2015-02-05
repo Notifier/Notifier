@@ -15,9 +15,15 @@ use Notifier\Recipient\RecipientInterface;
 
 /**
  * @author Dries De Peuter <dries@nousefreak.be>
+ * @contributor Joeri van Dooren
  */
 interface ChannelInterface
 {
+    /**
+     * @return string
+     */
+    public function getIdentifier();
+
     /**
      * Test if the channel can send the message given the supplied parameters.
      *

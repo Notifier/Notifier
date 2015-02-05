@@ -25,6 +25,14 @@ class Channel implements ChannelInterface
     public $messages = array();
 
     /**
+     * @return string
+     */
+    public function getIdentifier()
+    {
+        return 'test_channel';
+    }
+
+    /**
      * @param  MessageInterface   $message
      * @param  RecipientInterface $recipient
      * @return bool

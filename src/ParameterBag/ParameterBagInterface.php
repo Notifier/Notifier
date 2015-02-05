@@ -7,15 +7,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Notifier\Recipient;
-
-use Notifier\ParameterBag\ParameterBagTrait;
+namespace Notifier\ParameterBag;
 
 /**
- * @author Dries De Peuter <dries@nousefreak.be>
- * @contributor Joeri van Dooren
+ * @author Joeri van Dooren
  */
-class Recipient implements RecipientInterface
+interface ParameterBagInterface
 {
-    use ParameterBagTrait;
+    /**
+     * @return string
+     */
+    public function getIdentifier();
 }

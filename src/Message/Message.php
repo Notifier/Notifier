@@ -8,13 +8,18 @@
  */
 
 namespace Notifier\Message;
+
+use Notifier\ParameterBag\ParameterBagTrait;
 use Notifier\Type\TypeInterface;
 
 /**
  * @author Dries De Peuter <dries@nousefreak.be>
+ * @contributor Joeri van Dooren
  */
 class Message implements MessageInterface
 {
+    use ParameterBagTrait;
+
     /**
      * @var TypeInterface
      */
@@ -29,6 +34,8 @@ class Message implements MessageInterface
     }
 
     /**
+     * Set the message type.
+     *
      * @param TypeInterface $type
      */
     public function setType(TypeInterface $type)
@@ -37,6 +44,8 @@ class Message implements MessageInterface
     }
 
     /**
+     * Get the message type.
+     *
      * @return TypeInterface
      */
     public function getType()
